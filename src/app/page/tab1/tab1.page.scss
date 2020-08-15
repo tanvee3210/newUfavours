@@ -1,0 +1,22 @@
+.new-background-color {
+    --background: linear-gradient(to right, #00979d 0%, #0bd3af 100%);
+    border: 0px !important;
+}
+
+ion-title.md.title-default.hydrated {
+    color: #ffffff;
+    text-align: center;
+}
+
+ion-col.search.md.hydrated {
+    bottom: 75px;
+}
+
+ion-row.cards.md.hydrated {
+    /* bottom: 55px; */
+    margin-top: -70px;
+}
+
+ion-card.md.hydrated {
+    width: 100%;
+}

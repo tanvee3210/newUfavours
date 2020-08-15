@@ -1,0 +1,125 @@
+// UpdateProfile
+.new-background-color {
+    --background: linear-gradient(to right, #00979d 0%, #0bd3af 100%);
+    border: 0px !important;
+}
+
+ion-title.md.title-default.hydrated {
+    color: #ffffff;
+    text-align: center;
+}
+
+// div
+.div11 {
+    margin: 10px;
+    background: #d3d3d317;
+    // height: 640px;
+    padding-top: 10px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 13px 92px -20px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 13px 92px -20px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px -11px 54px -20px rgba(0, 0, 0, 0.75);
+}
+
+ion-row.row1.md.hydrated {
+    width: 100%;
+    text-align: center;
+}
+
+h5.h5 {
+    font-size: 13px;
+    color: #ffffff;
+}
+
+h5.h55 {
+    font-size: 13px;
+    color: black;
+}
+
+ion-col.colss.md.hydrated {
+    background: black;
+}
+
+ion-col.cols.md.hydrated {
+    background: #edf2f3;
+    /* color: black; */
+}
+
+ion-row.row2.md.hydrated {
+    margin-top: 15px;
+    text-align: center;
+    border: 1px solid lightgray;
+}
+
+ion-button.edit.md.button.button-small.button-solid.ion-activatable.ion-focusable.hydrated {
+    height: 20px;
+    margin-top: -20px;
+    margin-left: -3px;
+    padding-left: 10px;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+// card
+ion-card.md.hydrated {
+    width: 100%;
+    padding: 10px;
+}
+
+p.userdes {
+    margin-top: -6px;
+}
+
+p.address {
+    margin-top: -15px;
+}
+
+h5.username {
+    color: black;
+}
+
+// time
+ion-button.time.md.button.button-block.button-solid.ion-activatable.ion-focusable.hydrated {
+    font-weight: 300;
+    --background: linear-gradient(to right, #00979d 0%, #0bd3af 100%);
+    margin: 10px;
+}
+
+// message
+ion-button.message.md.button.button-block.button-solid.ion-activatable.ion-focusable.hydrated {
+    margin-left: 10px;
+    color: #0ad2af;
+    --background: none;
+    border: 1px solid lightgrey;
+    margin-right: 10px;
+}
+
+// icons
+ion-icon.md.hydrated {
+    font-size: 25px;
+    color: #ffffff;
+    padding-left: 10px;
+}
+
+// Addicons
+ion-icon.add.md.hydrated {
+    color: #ffffff;
+    background: grey;
+    padding-left: 0px;
+    border-radius: 4px;
+    font-size: 30px;
+}
+
+ion-back-button.md.button.back-button-has-icon-only.in-toolbar.ion-activatable.ion-focusable.hydrated {
+    display: block;
+    color: #ffffff;
+}
+
+ion-button.review.md.button.button-block.button-solid.ion-activatable.ion-focusable.hydrated {
+    margin-left: 10px;
+    color: #212529;
+    border: 1px solid lightgrey;
+    --background: none;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,97 @@
+<ion-header class="ion-no-border" *ngIf="!createprofile">
+  <ion-toolbar class="new-background-color">
+    <!-- <ion-icon name="chevron-back-outline" slot="start" [defaultHref]="defaultBackLink"></ion-icon> -->
+    <ion-buttons slot="start">
+      <ion-back-button (click)="backButton()" icon="chevron-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!createprofile">
+  <ion-content>
+    <ion-row>
+      <ion-searchbar></ion-searchbar>
+    </ion-row>
+    <div class="div11">
+      <ion-row class="row1">
+        <ion-col size="12">
+          <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+        </ion-col>
+        <!-- <ion-col size="8"> -->
+        <!-- <ion-row class="row2">
+            <ion-col size="6" class="colss">
+              <h5 class="h5">Time Given</h5>
+            </ion-col>
+            <ion-col size="6" class="colss">
+              <h5 class="h5">Time Received</h5>
+            </ion-col>
+            <ion-col size="6" class="cols">
+              <h5 class="h55" *ngIf="otherDetails">{{otherDetails.given_time}} Housrs</h5>
+            </ion-col>
+            <ion-col size="6" class="cols">
+              <h5 class="h55" *ngIf="otherDetails">{{otherDetails.receive_time}} Hours</h5>
+            </ion-col>
+          </ion-row> -->
+        <!-- </ion-col> -->
+      </ion-row>
+
+
+      <ion-row>
+        <ion-card class="cards">
+          <h5 class="username" *ngIf="otherDetails">{{otherDetails.name}}</h5>
+          <p class="userdes" *ngIf="otherDetails">{{otherDetails.skill}}</p>
+          <p class="address">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam facilis.</p>
+        </ion-card>
+      </ion-row>
+
+      <div padding class="div33">
+        <!-- <ion-item
+          style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;  margin-top: 10px;">
+          <ion-input type="text" [(ngModel)]="data" placeholder="Name"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;  ">
+          <ion-input type="text" ng placeholder="Job title"></ion-input>
+        </ion-item>
+        <br> -->
+        <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
+          <ion-input type="text" placeholder="Location"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
+          <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
+          <ion-label>Other Favours</ion-label>
+          <ion-select value="dog">
+            <ion-select-option value="cat">Shopping</ion-select-option>
+            <ion-select-option value="dog">Cleaning</ion-select-option>
+            <ion-select-option value="dog">Company</ion-select-option>
+            <ion-select-option value="dog">Gardening</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <br>
+        <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
+          <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
+          <ion-label>Qualifications/Certifications</ion-label>
+          <ion-select value="dog">
+            <ion-select-option value="cat">xyz</ion-select-option>
+            <ion-select-option value="dog">zbc</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+    </div>
+
+    <div padding>
+      <ion-button expand="block" class="review" (click)="onReviews()" routerDirection="forward">Review<ion-icon
+          name="add" class="add" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+    <div padding>
+      <ion-button expand="block" class="message" (click)="onMessage()" routerDirection="forward">Message
+      </ion-button>
+    </div>
+    <div padding>
+      <ion-button expand="block" (click)="timeValidationRequest()" class="time">Time Validation</ion-button>
+    </div>
+  </ion-content>
+</ion-content>

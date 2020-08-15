@@ -1,0 +1,47 @@
+ion-slides {
+    height: 100%;
+}
+
+.swiper-slide {
+    display: block;
+}
+
+.swiper-slide h2 {
+    margin-top: 2.8rem;
+}
+
+.swiper-slide img {
+    height: 50%;
+    width: 100%;
+    /* margin: 60px 0 40px; */
+    pointer-events: none;
+}
+
+.slide {
+    height: 40em;
+    text-align: center;
+}
+
+ion-button {
+    font-weight: 300;
+    --background: linear-gradient(to right, #00979d 0%, #0bd3af 100%);
+}
+
+b {
+    font-weight: 500;
+}
+
+p {
+    padding: 0 40px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ion-color-step-600, #60646b);
+}
+
+p b {
+    color: var(--ion-text-color, #000000);
+}
+
+#myTabBar {
+    display: none !important;
+}

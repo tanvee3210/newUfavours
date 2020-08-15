@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="new-background-color">
+    <ion-title>Inbox</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <img src="../../../assets/images/Ufavoursimages/Inbox-page.jpg" class="img-responsive" alt="Image">
+  <ion-row>
+    <ion-col size="12" class="search">
+      <ion-searchbar></ion-searchbar>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="cards">
+    <ion-card (click)="onMessage(list)" routerDirection="forward" *ngFor="let list of inboxList; let i = index;">
+      <ion-row>
+        <ion-col class="imgs" size="4">
+          <img src="../../../assets/images/Ufavoursimages/Child.jpg">
+        </ion-col>
+        <ion-col size="8">
+          <ion-label>
+            <h2>Rey</h2>
+            <h3>{{list.bio}}</h3>
+            <p>{{list.message}}</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+</ion-content>

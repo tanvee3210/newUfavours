@@ -1,0 +1,60 @@
+img.img-responsive {
+    position: relative;
+    height: 200px;
+}
+
+ion-searchbar.sc-ion-searchbar-md-h.sc-ion-searchbar-md-s.md.searchbar-left-aligned.hydrated {
+    position: absolute;
+}
+
+ion-col.icons.md.hydrated {
+    bottom: 60px;
+    color: #ffffffbf;
+    font-size: 40px;
+}
+
+ion-col.search.md.hydrated {
+    bottom: 64px;
+}
+
+h1.logo {
+    font-size: 30px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+h3.logo {
+    font-size: 23px;
+    text-align: center;
+    color: #ffffffb8;
+    font-weight: 500;
+    margin: 0;
+}
+
+ion-card.md.hydrated {
+    width: 100%;
+}
+
+ion-row.slider.md.hydrated {
+    text-align: center;
+}
+
+img.img {
+    border-radius: 50px;
+}
+
+// // slider
+// ion-row.sliders.md.hydrated {
+//     position: absolute !important;
+//     bottom: 312px !important;
+// }
+ion-row.sliders.md.hydrated {
+    margin-top: -65px;
+}
+
+.texts {
+    position: absolute;
+    top: 78px;
+    width: 100%;
+}

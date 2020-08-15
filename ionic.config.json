@@ -1,0 +1,7 @@
+{
+  "name": "uFaours",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

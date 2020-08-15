@@ -1,0 +1,88 @@
+ion-content {
+    --background: url('../../../assets/images/Ufavoursimages/Welcome-page.jpg') 0 0/100% 100% no-repeat;
+}
+
+ion-icon.md.hydrated {
+    color: white;
+}
+
+ion-input.sc-ion-input-md-h.sc-ion-input-md-s.md.hydrated {
+    color: #ffffff;
+    font-family: Avenir;
+}
+
+$white-color: #fff;
+$height100: 100%;
+
+ion-grid {
+    width: 100%;
+    height: 79%;
+    //background: #dfdfdf;
+}
+
+ion-row {
+    height: 96%;
+    text-align: center;
+}
+
+ion-col {
+    // border: 1px solid #488aff;
+    // background: $white-color;
+    margin: auto;
+}
+
+ion-button {
+    font-weight: 300;
+    --background: linear-gradient(to right, #00979d 0%, #0bd3af 100%);
+}
+
+// forget
+p.forget {
+    float: right;
+    padding-bottom: 40px;
+    color: #ffffff;
+    font-family: Avenir;
+}
+
+p.text {
+    font-family: Gabriola;
+    font-style: italic;
+    font-size: 21px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #ffffff;
+    padding-bottom: 50px;
+}
+
+span {
+    font-size: 17px;
+    background: -webkit-linear-gradient(#00979d 0%, #0bd3af 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h1.logo {
+    font-size: 50px;
+    background: linear-gradient(to right, #00979d 0%, #0bd3af 100%);
+    -webkit-background-clip: text;
+    font-weight: bolder;
+    -webkit-text-fill-color: transparent;
+}
+
+// signup
+p.signup {
+    text-align: center;
+    color: #ffffff;
+    font-family: Avenir;
+    padding-top: 80px;
+}
+
+@media (min-width: 240px) and (max-width: 768px) {
+
+    // ion-grid {
+    //     background: $white-color;
+    // }
+    ion-col {
+        border: none;
+    }
+}

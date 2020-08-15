@@ -1,0 +1,70 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="new-background-color">
+    <ion-title>Help</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="12" class="search">
+      <ion-searchbar></ion-searchbar>
+    </ion-col>
+  </ion-row>
+  <ion-card>
+    <ion-row>
+      <ion-col size="3">
+        <ion-icon name="chatbubbles-outline" class="iconss"></ion-icon>
+      </ion-col>
+
+      <ion-col size="9" (click)="onReport()">
+        <h4 class="h4">Report a problem</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <ion-icon name="chatbubbles-outline" class="iconss"></ion-icon>
+      </ion-col>
+
+      <ion-col size="9" (click)="onConcern()">
+        <h4 class="h4">Report a concern</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <ion-icon name="chatbubbles-outline" class="iconss"></ion-icon>
+      </ion-col>
+
+      <ion-col size="9" (click)="onUses()">
+        <h4 class="h4">Notes on how to use the app</h4>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">
+        <ion-icon name="chatbubbles-outline" class="iconss"></ion-icon>
+      </ion-col>
+
+      <ion-col size="9" (click)="onFAQ()">
+        <h4 class="h4">FAQ's</h4>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">
+        <ion-icon name="chatbubbles-outline" class="iconss"></ion-icon>
+      </ion-col>
+
+      <ion-col size="9">
+        <h4 class="h4">T&C's</h4>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-card>
+
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="onDelete()" expand="block" class="logout">Delete Account</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

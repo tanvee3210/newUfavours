@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tab1" icon="chevron-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Message</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="row1" style="background-color: hsl(228, 33%, 97%);">
+    <ion-row class="{{isSender(list.sender_id, 'class')}}" *ngFor=" let list of viewMessageList">
+      <ion-col size="{{isSender(list.sender_id, 'size1')}}">
+        <img *ngIf="isSender(list.sender_id, 'class') !='sender-row'"
+          src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+        <ion-label *ngIf="isSender(list.sender_id, 'class') =='sender-row'">
+          <h2>{{list.receiver_name}}</h2>
+          <p>{{list.message}}</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="{{isSender(list.sender_id,'size2')}}">
+        <ion-label *ngIf="isSender(list.sender_id, 'class') !='sender-row'">
+          <h2>{{list.receiver_name}}</h2>
+          <p>{{list.message}}.</p>
+        </ion-label>
+        <img *ngIf="isSender(list.sender_id, 'class') =='sender-row'"
+          src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+      </ion-col>
+    </ion-row>
+
+    <ion-item style="margin-left: auto; margin-right: auto; margin-top: 50px; width: 90%;margin-bottom: 25px;">
+      <ion-textarea rows="6" [(ngModel)]="message" cols="20" placeholder="Type Message here..."></ion-textarea>
+    </ion-item>
+    <ion-button expand="block" (click)="onSend()">Send Message</ion-button>
+  </ion-row>
+
+</ion-content>

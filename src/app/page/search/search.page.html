@@ -1,0 +1,71 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="new-background-color">
+    <!-- <ion-icon name="chevron-back-outline" slot="start" (click)="onBack()"></ion-icon> -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tab3" icon="chevron-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Search</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <img src="../../../assets/images/Ufavoursimages/Search-Page.jpg" alt="">
+  </ion-row>
+  <div class="search">
+    <ion-searchbar></ion-searchbar>
+  </div>
+
+  <ion-card>
+    <div padding class="div3">
+      <ion-item
+        style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 45px; margin-top: 10px;">
+        <ion-label>Skill Category</ion-label>
+        <ion-select value="" [(ngModel)]="skill">
+          <ion-select-option value="list" *ngFor="let list of Skilllist">{{list.skill_name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <br>
+      <ion-item
+        style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 47px;bottom: 15px;">
+        <ion-label>Job Title</ion-label>
+        <ion-select placeholder="">
+          <ion-select-option value="cat">asd</ion-select-option>
+          <ion-select-option value="dog">cvb</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <br>
+      <ion-item
+        style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 45px;bottom: 30px;">
+        <ion-input type="password" placeholder="Location +/- 2.5 10 miles"></ion-input>
+      </ion-item>
+      <br>
+      <ion-item
+        style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 45px;bottom: 45px;">
+        <ion-input type="password" placeholder="Key words"></ion-input>
+      </ion-item>
+    </div>
+  </ion-card>
+
+  <ion-card (click)="onLists()">
+    <ion-row>
+      <ion-col class="imgs" size="4">
+        <img src="../../../assets/images/Ufavoursimages/Child.jpg" class="img">
+      </ion-col>
+      <ion-col size="5">
+        <ion-label>
+          <h2>Philip Mack</h2>
+          <h3>Good Work</h3>
+          <p>You are doing good job</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="3">
+        <p>
+          <ion-icon name="location"></ion-icon>
+          France
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+</ion-content>

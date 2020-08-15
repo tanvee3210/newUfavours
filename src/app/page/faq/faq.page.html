@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tab5" icon="chevron-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>FAQ's</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <app-accordion *ngFor="let technology of technologies" name="{{ technology.name }}"
+    description="{{ technology.description }}" image="{{ technology.image }}" (change)="captureName($event)">
+  </app-accordion>
+
+</ion-content>

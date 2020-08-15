@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tab5" icon="chevron-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Report a problem</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="row1" style="background-color: #f5f6fa;">
+    <ion-item
+      style="margin-left: auto; margin-right: auto; border-radius: 10px; border: 1px solid lightgrey; margin-top: 20px; width: 90%;margin-bottom: 25px;">
+      <ion-input type="text" placeholder="Title" [(ngModel)]="title"></ion-input>
+    </ion-item>
+    <!-- <ion-col size="4">
+      <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+    </ion-col>
+    <ion-col size="8">
+      <ion-label>
+        <h2>Rey</h2>
+        <h3>Software Engineer</h3>
+        <p>You will remove these restraints and leave...</p>
+      </ion-label>
+    </ion-col> -->
+    <ion-item
+      style="margin-left: auto; margin-right: auto; margin-top: 10px;border-radius: 10px; border: 1px solid lightgrey; width: 90%;margin-bottom: 25px;">
+      <ion-textarea rows="6" cols="20" placeholder="Description"></ion-textarea>
+    </ion-item>
+    <ion-button expand="block" (click)="onLogin()">Add Report</ion-button>
+  </ion-row>
+</ion-content>

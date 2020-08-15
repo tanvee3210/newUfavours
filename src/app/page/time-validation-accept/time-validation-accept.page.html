@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="new-background-color">
+    <!-- <ion-icon name="chevron-back-outline" slot="start" (click)="onBack()"></ion-icon> -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tab4" icon="chevron-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Time Validation Accept</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-searchbar></ion-searchbar>
+  </ion-row>
+  <ion-card>
+    <ion-row (click)="onRequests()">
+      <ion-col size="4">
+        <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+      </ion-col>
+      <ion-col size="8">
+        <h5 class="username" *ngIf="timeData && timeData.from">{{timeData.from.username}}</h5>
+        <p class="userdes"  *ngIf="timeData && timeData.from">{{timeData.from.skill}}</p>
+        <p class="address">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam facilis.</p>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-row class="row2">
+    <p>'Name' would like to request</p>
+    <p>'Amount' of time for service given</p>
+  </ion-row>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <div padding>
+    <ion-button expand="block" (click)="onMessage()" class="message">Accept Time</ion-button>
+  </div>
+  <div padding>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="onTime()" class="time">Propose New Time</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="onDecline()" class="feedback">
+          Decline Time Feedback
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-footer>
