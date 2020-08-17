@@ -316,6 +316,8 @@ export class Tab2Page implements OnInit {
   }
 
 
+
+
   async getUserData(u: any) {
     this.api_service.user.data = u.data;
     console.log("here check", u.data);
