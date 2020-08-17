@@ -36,7 +36,8 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/', 'forgotpassword'])
   }
   async onLogin() {
-    if (this.email && this.password) {
+    let isValidEmail = this.api_service.validateEmail(this.email);
+    if (this.email && this.password && isValidEmail) {
       this.forloginuser = {
         email: this.email,
         password: this.password,
@@ -49,27 +50,11 @@ export class LoginPage implements OnInit {
 
     }
     else {
-      const alert = await this.alertCtrl.create({
-        message: "Username and Password are required ",
-        buttons: [
-          {
-            text: "OK"
-          }
-        ]
-      })
-      await alert.present();
+      this.api_service.showAlert('Valid Username and Password are required!');
     }
   }
   async getusererror() {
-    const alert = await this.alertCtrl.create({
-      message: "invalid username or password",
-      buttons: [
-        {
-          text: "OK"
-        }
-      ]
-    })
-    await alert.present();
+    this.api_service.showAlert('Valid Username and Password are required!');
   }
 
 

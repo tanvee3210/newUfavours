@@ -31,8 +31,8 @@ export class ForgotpasswordPage implements OnInit {
   }
 
   async onUpdate() {
-
-    if (this.email) {
+    let isValidEmail = this.api_service.validateEmail(this.email);
+    if (isValidEmail) {
       let userObj = {
         email: this.email,
       }
@@ -44,19 +44,12 @@ export class ForgotpasswordPage implements OnInit {
         },
           (error) => {
             console.log(error);
+            this.api_service.showAlert('Valid Email Id is Required!');
             //this.getusererror();
           })
     }
     else {
-      const alert = await this.alertCtrl.create({
-        message: " Fields are required ",
-        buttons: [
-          {
-            text: "OK"
-          }
-        ]
-      })
-      await alert.present();
+      this.api_service.showAlert('Valid Email Id is Required!');
     }
 
   }

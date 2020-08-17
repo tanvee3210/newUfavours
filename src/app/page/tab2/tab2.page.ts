@@ -22,6 +22,7 @@ export class Tab2Page implements OnInit {
   fname: any;
   lname: any;
   skill: any;
+  id: any;
   job: any;
   city: any;
   pincode: any;
@@ -60,6 +61,9 @@ export class Tab2Page implements OnInit {
       this.api_service.user.token
 
     }
+    //HERE UPDATE FOR SHOW
+    this.other_favour = this.api_service.user.data.other_favour;
+    this.qualification = this.api_service.user.data.qualification;
   }
   ngOnInit() {
 
@@ -229,7 +233,6 @@ export class Tab2Page implements OnInit {
   }
 
   async getotherfavours() {
-    debugger
     var token = this.usertoken
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -237,6 +240,26 @@ export class Tab2Page implements OnInit {
 
     console.log(headers);
     this.http.get(this.api_service.API_BASE + 'api/other_favours ', { headers: headers })
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.otherFavourList = res;
+      },
+        error => {
+          console.log('here error', error);
+        });
+  }
+
+
+  getJobTitle() {
+
+    var token = this.usertoken
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
+
+    console.log(headers);
+    this.http.get(this.api_service.API_BASE + 'api/job/skill/' + this.id, { headers: headers })
       .map((response) => response.json())
       .subscribe((res) => {
         console.log(res);
@@ -288,7 +311,7 @@ export class Tab2Page implements OnInit {
         pincode: this.pincode,
         qualification: this.qualification,
         picture: this.imgToUpload,
-        other_favour: this.other_favour
+        other_favour: this.other_favour.toString()
       }
 
       this.http.post(this.api_service.API_BASE + 'api/update_profile', userObj, options)
@@ -314,9 +337,6 @@ export class Tab2Page implements OnInit {
     }
 
   }
-
-
-
 
   async getUserData(u: any) {
     this.api_service.user.data = u.data;

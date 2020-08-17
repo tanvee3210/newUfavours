@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
+import { AlertController } from '@ionic/angular';
 import { ToastController, LoadingController } from '@ionic/angular';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class ApiServiceService {
   selectedThread: any = null;
   // _isLoggedIn: boolean;
 
-  constructor(public http: HttpClient, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {
+  constructor(public alertCtrl: AlertController, public http: HttpClient, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {
     let userExist = localStorage.getItem('userDetails');
     //   console.log('user', userExist);
     if (userExist && userExist != 'undefined') {
@@ -44,6 +45,26 @@ export class ApiServiceService {
 
   async hideLoader() {
     await this.loader.dismiss();
+  }
+
+  async validateEmail(email: any) {
+    var pattern = /^[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)*@[a-z0-9]+(\-[a-z0-9]+)*(\.[a-z0-9]+(\-[a-z0-9]+)*)*\.[a-z]{2,4}$/;
+    if (pattern.test(email)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  async showAlert(msg: any) {
+    const alert = await this.alertCtrl.create({
+      message: msg,
+      buttons: [
+        {
+          text: "OK"
+        }
+      ]
+    })
+    await alert.present();
   }
 
   async updateUser() {
