@@ -20,7 +20,6 @@ export class OthersprofilePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    debugger
     this.route.queryParams.subscribe(params => {
       if (params && params.pagename) {
         this.pageName = params.pagename;

@@ -2,7 +2,7 @@
   <ion-toolbar class="new-background-color">
     <!-- <ion-icon name="chevron-back-outline" slot="start" (click)="onBack()"></ion-icon> -->
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="othersprofile" icon="chevron-back"></ion-back-button>
+      <ion-back-button (click)="onBack()" icon="chevron-back"></ion-back-button>
     </ion-buttons>
     <ion-title>Time Validation Request</ion-title>
   </ion-toolbar>
@@ -19,8 +19,8 @@
         <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
       </ion-col>
       <ion-col size="8">
-        <h5 class="username">Stephen Messy</h5>
-        <p class="userdes">Software Engineer</p>
+        <h5 class="username" *ngIf="requestData && requestData.from">{{requestData.from.name}}</h5>
+        <p class="userdes"  *ngIf="requestData && requestData.from">{{requestData.from.skill}}</p>
         <p class="address">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam facilis.</p>
       </ion-col>
     </ion-row>
@@ -29,17 +29,14 @@
     <ion-item
       style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 45px; margin-top: 10px;">
       <ion-label>Amount</ion-label>
-      <ion-select multiple="true" cancelText="Nah" okText="Okay!">
-        <ion-select-option value="bacon">Bacon</ion-select-option>
-        <ion-select-option value="olives">Black Olives</ion-select-option>
-        <ion-select-option value="xcheese">Extra Cheese</ion-select-option>
-        <ion-select-option value="peppers">Green Peppers</ion-select-option>
-        <ion-select-option value="mushrooms">Mushrooms</ion-select-option>
-        <ion-select-option value="onions">Onions</ion-select-option>
-        <ion-select-option value="pepperoni">Pepperoni</ion-select-option>
-        <ion-select-option value="pineapple">Pineapple</ion-select-option>
-        <ion-select-option value="sausage">Sausage</ion-select-option>
-        <ion-select-option value="Spinach">Spinach</ion-select-option>
+      <ion-select multiple="false" cancelText="Cancel" okText="Okay!" [(ngModel)]="workingTime">
+        <ion-select-option value="0.5 hours">0.5 hours</ion-select-option>
+        <ion-select-option value="1 hours">1 hours</ion-select-option>
+        <ion-select-option value="2 hours">2 hours</ion-select-option>
+        <ion-select-option value="1/2 days">1/2 days</ion-select-option>
+        <ion-select-option value="1 days">1 days</ion-select-option>
+        <ion-select-option value="1.5 days">1.5 days</ion-select-option>
+        <ion-select-option value="2 days">2 days</ion-select-option>
       </ion-select>
     </ion-item>
   </div>

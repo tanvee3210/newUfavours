@@ -14,7 +14,7 @@ import { from } from 'rxjs';
   styleUrls: ['./review.page.scss'],
 })
 export class ReviewPage implements OnInit {
-  feedback:any;
+  review:any;
   id:any;
   otherDetails:any;
   message:any;
@@ -38,6 +38,9 @@ export class ReviewPage implements OnInit {
     });
   } 
 
+  onBack(){
+    this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename: 'tab4' ,id: this.id} })
+  }
   getDetails(){
     let token = this.api_service.user.Token.token
     let headers = new Headers();
@@ -55,24 +58,23 @@ export class ReviewPage implements OnInit {
           console.log('here error', error);
         });
   }
-  sendFeedback() {
+  sendReview() {
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    let feedBackData = {
-      senderid :this.api_service.userDetailsLocal(),
-      receiverid :this.id,
-      text :this.message ,
-      taskid:"" ,
+    let reviewData = {
+      senderid :this.api_service.user.data.id,
+      receiverid :parseInt(this.id),
+      message :this.message 
     }
-    this.http.post(this.api_service.API_BASE + 'api/decline_feedback', { headers: headers })
+    this.http.post(this.api_service.API_BASE + 'api/send_request',reviewData, { headers: headers})
       .map((response) => response.json())
       .subscribe((res) => {
         console.log(res);
-        this.feedback = res.data;
+        this.review = res.data;
       },
         error => {
           console.log('here error', error);

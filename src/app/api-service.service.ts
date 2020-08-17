@@ -51,11 +51,6 @@ export class ApiServiceService {
     localStorage.setItem('userDetails', JSON.stringify(this.user));
   }
 
-  async userDetailsLocal(){
-    localStorage.getItem('userDetails');
-    console.log('user', this.user);
-  }
-
   async clickLogin() {
 
   }

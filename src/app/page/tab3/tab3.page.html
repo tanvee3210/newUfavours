@@ -15,10 +15,10 @@
 
   <ion-row class="sliders">
     <ion-slides class="slides" [options]="slideOpts1" (click)="onskillCategory()">
-      <ion-slide class="ion-slide" *ngFor="let list of sliderImages1">
+      <ion-slide class="ion-slide" *ngFor="let list of allSkilllist">
         <ion-avatar>
-          <img src="{{list.img}}" (click)="sliderGo(list)">
-          <p class="name"><strong></strong></p>
+          <img src="{{list.img}}"(click)="sliderGo(list)">
+          <p class="name" style="font-size:14px">{{list.skill_name}}</p>
         </ion-avatar>
         <p></p>
       </ion-slide>

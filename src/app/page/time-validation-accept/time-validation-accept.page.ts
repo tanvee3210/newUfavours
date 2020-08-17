@@ -10,6 +10,7 @@ import { Http, Response, Headers } from '@angular/http';
 export class TimeValidationAcceptPage implements OnInit {
 id:any;
 timeData:any;
+acceptTimeData:any
   constructor(private router: Router,public route:ActivatedRoute,
      public api_service: ApiServiceService,public http:Http) { }
 
@@ -24,10 +25,10 @@ timeData:any;
   });
 }
   onDecline() {
-    this.router.navigate(['/', 'feedback'])
+    this.router.navigate(['/', 'feedback'], { queryParams: { id: this.timeData.task_id } })
   }
   onTime() {
-    this.router.navigate(['/', 'time-validation-request'])
+    this.router.navigate(['/', 'time-validation-request'], { queryParams: { id: this.timeData.task_id } })
   }
 
   getRequestData(){
@@ -48,5 +49,27 @@ timeData:any;
           console.log('here error', error);
         });
   }
+  acceptTime(){
+    let token = this.api_service.user.Token.token
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
 
+    console.log(headers);
+    debugger
+    let acceptData={
+      senderid:this.timeData.assign_to,
+      receiverid:this.timeData.assign_from,
+      taskid:this.timeData.task_id
+    }
+    this.http.post(this.api_service.API_BASE + 'api/acceptRequest', acceptData,{ headers: headers })
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.acceptTimeData = res.data;
+      },
+        error => {
+          console.log('here error', error);
+        });
+  }
 }

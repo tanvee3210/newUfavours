@@ -33,7 +33,7 @@ export class SearchPage implements OnInit {
   ngOnInit() {
   }
   onLists() {
-    this.router.navigate(['/', 'othersprofile'])
+    this.router.navigate(['/', 'othersprofile'],{ queryParams: { pagename: 'search' }})
   }
   onBack() {
     this.router.navigate(['/', 'tab3'])

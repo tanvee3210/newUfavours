@@ -23,6 +23,7 @@ export class Tab3Page implements OnInit {
     spaceBetween: 0,
     autoplay: true
   };
+  allSkilllist:any;
   reviewList: any;
   constructor(private router: Router,
     public alertCtrl: AlertController,
@@ -31,7 +32,8 @@ export class Tab3Page implements OnInit {
 
   ionViewDidEnter() {
     let id = this.api_service.user.data.id
-    this.getReviewList()
+    this.getReviewList();
+    this.getSkilllist();
   }
 
   ngOnInit() {
@@ -87,6 +89,24 @@ export class Tab3Page implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.reviewList = res.data;
+      },
+        error => {
+          console.log('here error', error);
+        });
+  }
+
+  async getSkilllist() {
+    let token = this.api_service.user.Token.token
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
+
+    console.log(headers);
+    this.http.get(this.api_service.API_BASE + 'api/skill_list', { headers: headers })
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.allSkilllist = res.data;
       },
         error => {
           console.log('here error', error);
