@@ -35,6 +35,7 @@ export class Tab2Page implements OnInit {
   usertoken: any
   otherFavourList: any = [];
   other_favour: any;
+  jobList:any;
   constructor(private router: Router,
     public alertCtrl: AlertController,
     private http: Http,
@@ -211,6 +212,26 @@ export class Tab2Page implements OnInit {
         error => {
           console.log('here error', error);
         });
+  }
+
+  getJobSkill(){
+    let token = this.userdetailes.Token.token
+    // console.log('token', token)
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
+
+    console.log(headers);
+    this.http.get(this.api_service.API_BASE + 'api/job/skill/'+ this.skill.id,{ headers: headers })
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.jobList = res.data;
+      },
+        error => {
+          console.log('here error', error);
+        });
+
   }
 
   // qualificationlist
