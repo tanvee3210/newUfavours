@@ -65,6 +65,7 @@ export class ReviewPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
+    
     let reviewData = {
       senderid :this.api_service.user.data.id,
       receiverid :parseInt(this.id),
