@@ -65,13 +65,13 @@ export class ReviewPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    
+
     let reviewData = {
-      senderid :this.api_service.user.data.id,
-      receiverid :parseInt(this.id),
-      message :this.message 
+      toRating :this.api_service.user.data.id,
+      rating :2.5,
+      review :this.message 
     }
-    this.http.post(this.api_service.API_BASE + 'api/send_request',reviewData, { headers: headers})
+    this.http.post(this.api_service.API_BASE + 'api/sendReview',reviewData, { headers: headers})
       .map((response) => response.json())
       .subscribe((res) => {
         console.log(res);
