@@ -23,7 +23,7 @@
       <!-- <ion-input type="password" placeholder="Skill Catagory(s) "></ion-input> -->
       <ion-label>Skills</ion-label>
       <ion-select value="" [(ngModel)]="skill">
-        <ion-select-option value="list" *ngFor="let list of Skilllist">{{list.skill_name}}</ion-select-option>
+        <ion-select-option *ngFor="let list of Skilllist">{{list.skill_name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <br>
@@ -50,14 +50,14 @@
       <!-- <ion-input type="password" placeholder="Qualifications/certifications"></ion-input> -->
       <ion-label>Qualifications/certifications</ion-label>
       <ion-select value="list" [(ngModel)]="qualification">
-        <ion-select-option value="list" *ngFor="let list of qualificationList">{{list.name}}</ion-select-option>
+        <ion-select-option *ngFor="let list of qualificationList">{{list.name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;">
       <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
       <ion-label>Other Favours</ion-label>
-      <ion-select value="list" [(ngModel)]="other_favour">
+      <ion-select value="list" [(ngModel)]="other_favour" multiple="true">
         <ion-select-option *ngFor="let list of otherFavourList">{{list.f_name}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -114,8 +114,8 @@
 
       <ion-row>
         <ion-card class="cards">
-          <h5 class="username">{{userdetailes.name}}</h5>
-          <p class="userdes">{{userdetailes.job}}</p>
+          <h5 class="username">{{api_service.user.data.name}}</h5>
+          <p class="userdes">{{api_service.user.data.job}}</p>
           <p class="address">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam facilis.</p>
         </ion-card>
       </ion-row>
@@ -123,39 +123,31 @@
       <div padding class="div33">
         <ion-item
           style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;  margin-top: 10px;">
-          <ion-input type="text" [(ngModel)]="data" placeholder="Name"></ion-input>
+          <ion-input type="text" [(ngModel)]="data" placeholder="Name" [disabled]="true"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;  ">
-          <ion-input type="text" ng placeholder="Job title"></ion-input>
+          <ion-input type="text" ng placeholder="Job title" [disabled]="true"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;  ">
-          <ion-input type="text" placeholder="Location"></ion-input>
+          <ion-input type="text" placeholder="Location" [disabled]="true"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
           <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
-          <ion-label>Other Favours</ion-label>
-          <ion-select value="dog">
-            <ion-select-option value="cat">Shopping</ion-select-option>
-            <ion-select-option value="dog">Cleaning</ion-select-option>
-            <ion-select-option value="dog">Company</ion-select-option>
-            <ion-select-option value="dog">Gardening</ion-select-option>
-          </ion-select>
+          <!-- <ion-label>Other Favours</ion-label> -->
+          <ion-input type="text" [disabled]="true" [(ngModel)]="other_favour"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
           <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
-          <ion-label>Qualifications/Certifications</ion-label>
-          <ion-select value="dog">
-            <ion-select-option value="cat">xyz</ion-select-option>
-            <ion-select-option value="dog">zbc</ion-select-option>
-          </ion-select>
+          <!-- <ion-label>Qualifications/Certifications</ion-label> -->
+          <ion-input type="text" [disabled]="true" [(ngModel)]="qualification"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;">
-          <ion-input type="password" placeholder="Reviews/Testimonials">
+          <ion-input type="password" placeholder="Reviews/Testimonials" [disabled]="true">
           </ion-input>
           <!-- <ion-icon name="add" class="add"></ion-icon> -->
         </ion-item>
