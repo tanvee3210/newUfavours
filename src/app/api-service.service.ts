@@ -76,6 +76,52 @@ export class ApiServiceService {
     localStorage.setItem('userDetails', JSON.stringify(this.user));
   }
 
+  getDecimals(n: any) {
+    const parts = n.toLocaleString('en-US', { maximumSignificantDigits: 18 }).split('.')
+    return parts.length > 1 ? Number('0.' + parts[1]) : 0;
+  }
+
+  getStarMarks(n1: any) {
+    let n: any = n1;
+    let decimals: any = this.getDecimals(n);
+    let emptyStar = 0;
+    let fullstar = n - decimals;
+    let halfStar = 0;
+    let starts = '';
+
+    if (decimals > 0.5) {
+      if (fullstar < 5) {
+        fullstar = fullstar + 1;
+      }
+    }
+    if (0 < decimals && decimals < 0.51) {
+      halfStar = 1;
+    }
+    if (n > 4) {
+      emptyStar = 0;
+    } else {
+      emptyStar = 5 - fullstar;
+    }
+    if (halfStar == 1) {
+      emptyStar = emptyStar - 1;
+    }
+
+    if (fullstar > 0) {
+      for (let i = 0; i < fullstar; i++) {
+        starts += '<i class="fa fa-star checked"></i>';
+      }
+    }
+    if (halfStar == 1) {
+      starts += '<i class="fa fa-star-half-o checked"></i>';
+    }
+    if (emptyStar > 0) {
+      for (let i = 0; i < emptyStar; i++) {
+        starts += '<i class="fa fa-star-o"></i>';
+      }
+    }
+    return starts;
+  }
+
 
   // Loccation
   // getLocation() {
