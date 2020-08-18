@@ -33,10 +33,12 @@ export class Tab2Page implements OnInit {
   userdetailes: any
   data: any = {}
   usertoken: any
-  otherFavourList: any = [];
+  otherFavourList: any;
   other_favour: any;
   bio: any;
   getJobList: any = [];
+  avgRating: any = 0;
+
   constructor(private router: Router,
     public alertCtrl: AlertController,
     private http: Http,
@@ -66,8 +68,13 @@ export class Tab2Page implements OnInit {
 
     }
     //HERE UPDATE FOR SHOW
-    this.other_favour = this.api_service.user.data.other_favour;
-    this.qualification = this.api_service.user.data.qualification;
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.other_favour) {
+      this.other_favour = this.api_service.user.data.other_favour;
+    }
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.qualification) {
+      this.qualification = this.api_service.user.data.qualification;
+    }
+    this.getUserDetails();
   }
   ngOnInit() {
 
@@ -257,7 +264,6 @@ export class Tab2Page implements OnInit {
   }
 
   async getotherfavours() {
-    debugger
     var token = this.usertoken
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -274,10 +280,6 @@ export class Tab2Page implements OnInit {
           console.log('here error', error);
         });
   }
-
-
-
-
 
   // updateprofile
   async onUpdate() {
@@ -340,8 +342,30 @@ export class Tab2Page implements OnInit {
     })
     await alert.present();
     this.createprofile = false
-
   }
+
+  async getUserDetails() {
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.id) {
+      var token = this.api_service.user.Token.token;
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("Authorization", "Bearer " + token);
+
+      console.log(headers);
+      this.http.get(this.api_service.API_BASE + 'api/details', { headers: headers })
+        .map((response) => response.json())
+        .subscribe((res) => {
+          console.log(res);
+          if (res && res.data && res.data.averageRating) {
+            this.avgRating = res.data.averageRating;
+          }
+        },
+          error => {
+            console.log('here error', error);
+          });
+    }
+  }
+
   async onLogout() {
     // localStorage.clear()
     // this.router.navigate(['/', 'login'])
