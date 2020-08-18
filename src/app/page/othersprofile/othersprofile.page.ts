@@ -35,8 +35,9 @@ export class OthersprofilePage implements OnInit {
     this.router.navigate(['/', this.pageName])
   }
   //get Other user details using id
-  getOtherUserDetail() {
-    let token = this.api_service.user.Token.token
+   getOtherUserDetail() {
+    this.api_service.showLoader();
+    let token = this.api_service.user.Token.token;
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", "Bearer " + token);
@@ -44,21 +45,23 @@ export class OthersprofilePage implements OnInit {
     console.log(headers);
     this.http.get(this.api_service.API_BASE + 'api/get_user/' + this.id, { headers: headers })
       .map((response) => response.json())
-      .subscribe((res) => {
+      .subscribe(async (res) => {
         console.log(res);
         this.otherDetails = res.data;
+        await this.api_service.hideLoader();
       },
         error => {
           console.log('here error', error);
+          this.api_service.hideLoader();
         });
   }
   timeValidationRequest() {
-    this.router.navigate(['/', 'time-validation-request'])
+    this.router.navigate(['/', 'time-validation-request'], { queryParams: { id: this.id } })
   }
   onReviews() {
     this.router.navigate(['/', 'review'], { queryParams: { id: this.id } })
   }
   onMessage() {
-    this.router.navigate(['/', 'send-message'])
+    this.router.navigate(['/', 'send-message'], { queryParams: { id: this.id } })
   }
 }

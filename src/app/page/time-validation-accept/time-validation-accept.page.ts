@@ -32,6 +32,7 @@ acceptTimeData:any
   }
 
   getRequestData(){
+    this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     // console.log('token', token)
     let headers = new Headers();
@@ -44,9 +45,11 @@ acceptTimeData:any
       .subscribe((res) => {
         console.log(res);
         this.timeData = res.data;
+        this.api_service.hideLoader();
       },
         error => {
-          console.log('here error', error);
+          console.log('here error', error); 
+          this.api_service.hideLoader();
         });
   }
   acceptTime(){

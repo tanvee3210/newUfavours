@@ -19,6 +19,10 @@
     </ion-segment-button>
   </ion-segment>
 
+  <!-- <div>
+    <ion-spinner></ion-spinner>
+  </div> -->
+  
   <div [ngSwitch]="notification">
     <ion-list *ngSwitchCase="'for'">
       <ion-card *ngFor="let list of requestForMe">
@@ -48,7 +52,10 @@
           </ion-col>
           <ion-col size="3">
             <p class="status"><img src="../../../assets/images/Ufavoursimages/approvedicon.png" alt="" class="iconss">
-              <small>{{list.status}}</small></p>
+              <small class="greenColor" *ngIf="list && list.status == 'approved'">{{list.status}}</small>
+              <small class="yellowColor" *ngIf="list && list.status == 'pending'">{{list.status}}</small>
+              <small class="redColor" *ngIf="list && list.status == 'reject'">{{list.status}}</small>
+            </p>
           </ion-col>
         </ion-row>
       </ion-card>
