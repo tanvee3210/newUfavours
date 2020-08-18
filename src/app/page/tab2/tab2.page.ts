@@ -82,6 +82,10 @@ export class Tab2Page implements OnInit {
   onEdit() {
     this.createprofile = true
   }
+
+  onSearch() {
+    this.router.navigate(['/', 'search'])
+  }
   async openCameraOption() {
     let alert = await this.alertCtrl.create({
       header: " Select Image",
