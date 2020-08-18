@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from '../../api-service.service';
 import { Http, Response, Headers } from '@angular/http';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.page.html',
@@ -13,6 +15,7 @@ export class FeedbackPage implements OnInit {
   feedbackResponse:any;
   message:any;
   constructor(private router: Router,public route:ActivatedRoute,
+    public alertCtrl: AlertController,
     public api_service: ApiServiceService,public http:Http) { }
 
   ngOnInit() {
@@ -31,6 +34,7 @@ export class FeedbackPage implements OnInit {
     
   }
   getRequestData(){
+    this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -42,13 +46,16 @@ export class FeedbackPage implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.requestDetails = res.data;
+        this.api_service.hideLoader();
       },
         error => {
           console.log('here error', error);
+          this.api_service.hideLoader();
         });
   }
 
   declineFeedback(){
+    this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -63,19 +70,30 @@ export class FeedbackPage implements OnInit {
     }
     this.http.post(this.api_service.API_BASE + 'api/decline_feedback', feedbackData,{ headers: headers })
       .map((response) => response.json())
-      .subscribe((res) => {
+      .subscribe(async (res) => {
         console.log(res);
-        this.feedbackResponse = res.data;
+        this.feedbackResponse = res;
+        this.api_service.hideLoader();
+        if (this.feedbackResponse) {
+          const alert = await this.alertCtrl.create({
+            message: "Decline Feedback Successfully!.",
+            buttons: [
+              {
+                text: "OK",
+                handler: () => {
+                  this.onBack()
+                }
+              }
+            ]
+          })
+          await alert.present();
+          
+        }
       },
         error => {
           console.log('here error', error);
+          this.api_service.hideLoader();
         });
   }
 }
 
-
-// post API https://ufavours.sdssoftltd.co.uk/api/declinetimefeed
-// 'senderid'   => 'required|integer',
-// 		'receiverid' => 'required|integer',
-// 		'text'       => 'required',
-// 		'taskid'     => 'required',

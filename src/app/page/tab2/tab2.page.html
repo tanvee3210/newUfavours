@@ -26,16 +26,16 @@
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
       <!-- <ion-input type="password" placeholder="Skill Catagory(s) "></ion-input> -->
       <ion-label>Skills</ion-label>
-      <ion-select value="" [(ngModel)]="skill" (ionChange)="getJobSkill()">
-        <ion-select-option [value]="list" *ngFor="let list of Skilllist">{{list.skill_name}}</ion-select-option>
+      <ion-select  [(ngModel)]="skill" (ionChange)="getJobSkill(skill)">
+        <ion-select-option [value]="list.skill_name" *ngFor="let list of Skilllist">{{list.skill_name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
       <!-- <ion-input type="text" placeholder="Current job title" [(ngModel)]="job"></ion-input> -->
       <ion-label>Current job title</ion-label>
-      <ion-select value="" [(ngModel)]="job">
-        <ion-select-option *ngFor="let list of jobList">{{list.job_name}}</ion-select-option>
+      <ion-select  [(ngModel)]="job" >
+        <ion-select-option [value]="list.job_name" *ngFor="let list of jobList">{{list.job_name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <!-- <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
@@ -60,8 +60,8 @@
       style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; margin-top: 10px;">
       <!-- <ion-input type="password" placeholder="Qualifications/certifications"></ion-input> -->
       <ion-label>Qualifications/certifications</ion-label>
-      <ion-select value="list" [(ngModel)]="qualification">
-        <ion-select-option *ngFor="let list of qualificationList">{{list.name}}</ion-select-option>
+      <ion-select [(ngModel)]="qualification">
+        <ion-select-option  [value]="list.name" *ngFor="let list of qualificationList">{{list.name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <br>

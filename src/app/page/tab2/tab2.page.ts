@@ -36,6 +36,7 @@ export class Tab2Page implements OnInit {
   otherFavourList: any = [];
   other_favour: any;
   bio: any;
+  jobList:any=[];
   getJobList: any = [];
   constructor(private router: Router,
     public alertCtrl: AlertController,
@@ -51,15 +52,17 @@ export class Tab2Page implements OnInit {
       this.usertoken = this.userdetailes.Token.token
       this.createprofile = false
       this.getSkilllist();
-      this.getJobTitle();
       this.getQualification();
       this.getotherfavours();
       this.api_service.user.token
+      
+    
+     
     } else {
       this.usertoken = this.userdetailes.token
       this.createprofile = true
       this.getSkilllist();
-      this.getJobTitle();
+      // this.getJobTitle();
       this.getQualification()
       this.getotherfavours();
       this.api_service.user.token
@@ -72,7 +75,21 @@ export class Tab2Page implements OnInit {
   ngOnInit() {
 
   }
+  setUserDetails(userDetails){
+    this.getJobSkill(this.userdetailes.data.skill);
+    this.fname = userDetails.first_name
+    this.lname =userDetails.last_name
+     this.bio=userDetails.bio
+     this.skill=userDetails.skill
+     this.job=userDetails.job
+     this.city=userDetails.city
+     this.pincode=userDetails.pincode
+     this.qualification=userDetails.qualification
+     this.imgToUpload=userDetails.picture
+     this.other_favour =userDetails.other_favour
+  }
   onEdit() {
+    this.setUserDetails(this.userdetailes.data);
     this.createprofile = true
   }
   async openCameraOption() {
@@ -123,7 +140,7 @@ export class Tab2Page implements OnInit {
   chooseImage(type) {
     var self = this;
     if (this.isMobileDevice()) {
-      var options = this.GetPictureOption(parseInt(type));
+      var options = self.GetPictureOption(parseInt(type));
       self.camera.getPicture(options).then(
         function (imageData) {
           self.imgToUpload = imageData;
@@ -218,23 +235,23 @@ export class Tab2Page implements OnInit {
   }
 
   // job title
-  getJobTitle() {
-    var token = this.usertoken
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Authorization", "Bearer " + token);
+  // getJobTitle() {
+  //   var token = this.usertoken
+  //   let headers = new Headers();
+  //   headers.append("Content-Type", "application/json");
+  //   headers.append("Authorization", "Bearer " + token);
 
-    console.log(headers);
-    this.http.get(this.api_service.API_BASE + 'api/job/skill/' + this.id, { headers: headers })
-      .map((response) => response.json())
-      .subscribe((res) => {
-        console.log(res);
-        this.getJobList = res;
-      },
-        error => {
-          console.log('here error', error);
-        });
-  }
+  //   console.log(headers);
+  //   this.http.get(this.api_service.API_BASE + 'api/job/skill/' + this.id, { headers: headers })
+  //     .map((response) => response.json())
+  //     .subscribe((res) => {
+  //       console.log(res);
+  //       this.getJobList = res;
+  //     },
+  //       error => {
+  //         console.log('here error', error);
+  //       });
+  // }
 
 
   // qualificationlist
@@ -257,7 +274,6 @@ export class Tab2Page implements OnInit {
   }
 
   async getotherfavours() {
-    debugger
     var token = this.usertoken
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -275,7 +291,27 @@ export class Tab2Page implements OnInit {
         });
   }
 
+  getJobSkill(value){
+    debugger
+    let skillId= this.Skilllist.find(s=> s.skill_name == value)
+    let token = this.userdetailes.Token.token
+    // console.log('token', token)
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
 
+    console.log(headers);
+    this.http.get(this.api_service.API_BASE + 'api/job/skill/'+ skillId.id,{ headers: headers })
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.jobList = res.data;
+      },
+        error => {
+          console.log('here error', error);
+        });
+
+  }
 
 
 

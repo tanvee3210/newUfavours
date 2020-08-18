@@ -60,6 +60,7 @@ export class Tab4Page implements OnInit {
 
   // RequestFromMe
   async getRequestFromme() {
+    this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     // console.log('token', token)
     let headers = new Headers();
@@ -72,9 +73,11 @@ export class Tab4Page implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.requestFromMe = res.data;
+        this.api_service.hideLoader();
       },
         error => {
           console.log('here error', error);
+          this.api_service.hideLoader();
         });
   }
 }

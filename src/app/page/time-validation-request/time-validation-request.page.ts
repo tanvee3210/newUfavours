@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from '../../api-service.service';
 import { Http, Response, Headers } from '@angular/http';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-time-validation-request',
   templateUrl: './time-validation-request.page.html',
@@ -12,6 +13,7 @@ export class TimeValidationRequestPage implements OnInit {
   requestData:any;
   workingTime:any;
   constructor(private router: Router,public route:ActivatedRoute,
+    public alertCtrl: AlertController,
     public api_service: ApiServiceService,public http:Http) { }
 
   ngOnInit() {
@@ -28,6 +30,7 @@ export class TimeValidationRequestPage implements OnInit {
     this.router.navigate(['/', 'time-validation-accept'], { queryParams: { id: this.id } })
   }
   getRequestData(){
+    this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -39,20 +42,22 @@ export class TimeValidationRequestPage implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.requestData = res.data;
+        this.api_service.hideLoader();
       },
         error => {
           console.log('here error', error);
+          this.api_service.hideLoader();
         });
   }
 
   onRequest(){
+    this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    debugger
     let data={
       senderid:this.requestData.assign_to,
       receiverid:this.requestData.assign_from,
@@ -60,12 +65,29 @@ export class TimeValidationRequestPage implements OnInit {
     }
     this.http.post(this.api_service.API_BASE + 'api/proposeNewTime', data, { headers: headers })
       .map((response) => response.json())
-      .subscribe((res) => {
+      .subscribe(async (res) => {
         console.log(res);
-        this.requestData = res.data;
+        this.requestData = res;
+        this.api_service.hideLoader();
+        if (this.requestData) {
+          const alert = await this.alertCtrl.create({
+            message: "Resquest Time Send Successfully!.",
+            buttons: [
+              {
+                text: "OK",
+                handler: () => {
+                  this.onBack()
+                }
+              }
+            ]
+          })
+          await alert.present();
+          
+        }
       },
         error => {
           console.log('here error', error);
+          this.api_service.hideLoader();
         });
   }
 }
