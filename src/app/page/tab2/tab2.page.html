@@ -36,6 +36,7 @@
       <ion-label>Job Title</ion-label>
       <ion-select value="" [(ngModel)]="job">
         <ion-select-option *ngFor="let list of getJobList">{{list.job}}</ion-select-option>
+        </ion-select>
       <!-- <ion-input type="password" placeholder="Skill Catagory(s) "></ion-input> -->
       <ion-label>Current job title</ion-label>
       <ion-select value="" [(ngModel)]="job">
@@ -91,7 +92,6 @@
 </ion-header>
 
 <ion-content *ngIf="!createprofile">
-  <ion-content>
     <ion-row>
       <ion-searchbar></ion-searchbar>
     </ion-row>
@@ -168,5 +168,4 @@
     <div padding>
       <ion-button expand="block" class="time" (click)="onLogout()">Logout</ion-button>
     </div>
-  </ion-content>
 </ion-content>
