@@ -36,6 +36,20 @@ img.iconss {
     height: 0.6em;
 }
 
-p.status {
+// p.status {
+//     color: #4ed966;
+// }
+
+.greenColor{
     color: #4ed966;
+    text-transform: capitalize;
+}
+
+.redColor {
+    color:red;
+    text-transform: capitalize;
+}
+.yellowColor {
+    color:yellow;
+    text-transform: capitalize;
 }
