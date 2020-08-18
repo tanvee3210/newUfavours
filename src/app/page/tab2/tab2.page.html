@@ -33,11 +33,6 @@
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
       <!-- <ion-input type="text" placeholder="Current job title" [(ngModel)]="job"></ion-input> -->
-      <ion-label>Job Title</ion-label>
-      <ion-select value="" [(ngModel)]="job">
-        <ion-select-option *ngFor="let list of getJobList">{{list.job}}</ion-select-option>
-      </ion-select>
-      <!-- <ion-input type="password" placeholder="Skill Catagory(s) "></ion-input> -->
       <ion-label>Current job title</ion-label>
       <ion-select value="" [(ngModel)]="job">
         <ion-select-option *ngFor="let list of jobList">{{list.job_name}}</ion-select-option>
