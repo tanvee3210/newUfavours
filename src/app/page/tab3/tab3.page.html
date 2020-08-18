@@ -14,11 +14,11 @@
   </ion-row>
 
   <ion-row class="sliders">
-    <ion-slides class="slides" [options]="slideOpts1" >
-      <ion-slide class="ion-slide" *ngFor="let list of allSkilllist" (click)="onskillCategory(list)" >
+    <ion-slides class="slides" [options]="slideOpts1">
+      <ion-slide class="ion-slide" *ngFor="let list of allSkilllist" (click)="onskillCategory(list)">
         <ion-avatar>
           <img src="{{list.img}}" (click)="sliderGo(list)">
-          <p class="name" style="font-size:14px" >{{list.skill_name}}</p>
+          <p class="name" style="font-size:14px">{{list.skill_name}}</p>
         </ion-avatar>
         <p></p>
       </ion-slide>
@@ -32,9 +32,10 @@
         <ion-col class="imgs" size="4">
           <img src="../../../assets/images/Ufavoursimages/Child.jpg" class="img">
         </ion-col>
-        <ion-col size="5">
+        <ion-col size="8">
           <ion-label>
             <h2>{{list.name}}</h2>
+            <div class="star-rating" [innerHTML]="api_service.getStarMarks(list.rating)"></div>
             <h3>{{list.rating_text}}</h3>
             <p>{{list.review_text}}</p>
           </ion-label>
