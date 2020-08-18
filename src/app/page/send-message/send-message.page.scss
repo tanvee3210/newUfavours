@@ -30,3 +30,8 @@ ion-button {
     font-weight: 300;
     --background: linear-gradient(to right, #00979d 0%, #0bd3af 100%);
 }
+
+ion-back-button.md.button.back-button-has-icon-only.in-toolbar.ion-activatable.ion-focusable.hydrated {
+    display: block;
+    color: #ffffff;
+}
