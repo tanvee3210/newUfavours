@@ -17,6 +17,9 @@ export class SearchPage implements OnInit {
   usertoken: any;
   userdetailes: any;
   jobTitleList: any = [];
+  searchData:any;
+  skill:any;
+  job:any;jobList:any=[]
   constructor(private router: Router,
     public alertCtrl: AlertController,
     private http: Http,
@@ -40,6 +43,8 @@ export class SearchPage implements OnInit {
   }
 
   async getSkilllist() {
+    this.searchData=[];
+    this.job="";
     let token = this.userdetailes.Token.token
     // console.log('token', token)
     let headers = new Headers();
@@ -67,7 +72,7 @@ export class SearchPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    this.http.get(this.api_service.API_BASE + 'api/job-by-skill/', { headers: headers })
+    this.http.get(this.api_service.API_BASE + 'api/job-by-skill', { headers: headers })
       .map((response) => response.json())
       .subscribe((res) => {
         console.log(res);
@@ -77,5 +82,47 @@ export class SearchPage implements OnInit {
         error => {
           console.log('here error', error);
         });
+  }
+
+  getJobSkill(){
+    let token = this.userdetailes.Token.token
+    // console.log('token', token)
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
+
+    console.log(headers);
+    this.http.get(this.api_service.API_BASE + 'api/job/skill/'+ this.skill.id,{ headers: headers })
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.jobList = res.data;
+      },
+        error => {
+          console.log('here error', error);
+        });
+
+  }
+
+  search(){
+    let token = this.userdetailes.Token.token
+    // console.log('token', token)
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
+    console.log(headers);
+    let find:any={}
+      find.skill =this.skill.skill_name
+      find.job = this.job.job_name 
+    this.http.post(this.api_service.API_BASE + 'api/search',find,{ headers: headers ,body:find})
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.searchData = res.data;
+      },
+        error => {
+          console.log('here error', error);
+        });
+
   }
 }

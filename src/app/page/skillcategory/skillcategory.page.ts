@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router ,ActivatedRoute} from '@angular/router';
+import { Http, Response, Headers } from '@angular/http';
+import { ApiServiceService } from '../../api-service.service';
 
 @Component({
   selector: 'app-skillcategory',
@@ -7,12 +9,48 @@ import { Router } from '@angular/router';
   styleUrls: ['./skillcategory.page.scss'],
 })
 export class SkillcategoryPage implements OnInit {
-
-  constructor(private router: Router) { }
+  skill:any;
+  skillsCatDetails:any;
+  constructor(private router: Router,
+    public route:ActivatedRoute,
+    public api_service: ApiServiceService,
+    private http: Http) { }
 
   ngOnInit() {
   }
-  onskillLists() {
-    this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename: 'skillcategory' } })
+
+  ionViewWillEnter() {
+    this.route.queryParams.subscribe(params => {
+      if (params && params.skill) {
+        this.skill = params.skill;
+        this.getDetails();
+      }
+    });
+  } 
+
+  onskillLists(value) {
+    this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename: 'skillcategory',id:value.id } })
+  }
+
+  getDetails(){
+    this.skillsCatDetails =[]
+    let token = this.api_service.user.Token.token
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
+
+    console.log(headers);
+    let skillData= {
+      "skill":this.skill
+      }
+    this.http.post(this.api_service.API_BASE + 'api/skills_userList',skillData ,{ headers: headers })
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.skillsCatDetails = res;
+      },
+        error => {
+          console.log('here error', error);
+        });
   }
 }

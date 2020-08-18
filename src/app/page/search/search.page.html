@@ -21,17 +21,16 @@
       <ion-item
         style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 45px; margin-top: 10px;">
         <ion-label>Skill Category</ion-label>
-        <ion-select value="" [(ngModel)]="skill">
-          <ion-select-option value="list" *ngFor="let list of Skilllist">{{list.skill_name}}</ion-select-option>
+        <ion-select value="" [(ngModel)]="skill" (ionChange)="getJobSkill()">
+          <ion-select-option [value]="list" *ngFor="let list of Skilllist">{{list.skill_name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <br>
       <ion-item
         style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 47px;bottom: 15px;">
         <ion-label>Job Title</ion-label>
-        <ion-select placeholder="">
-          <ion-select-option value="cat">asd</ion-select-option>
-          <ion-select-option value="dog">cvb</ion-select-option>
+        <ion-select placeholder="" [(ngModel)]="job" (ionChange)="search()">
+          <ion-select-option [value]="job" *ngFor="let job of jobList">{{job.job_name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <br>
@@ -48,21 +47,21 @@
   </ion-card>
 
   <ion-card (click)="onLists()">
-    <ion-row>
+    <ion-row *ngFor="let se of searchData">
       <ion-col class="imgs" size="4">
         <img src="../../../assets/images/Ufavoursimages/Child.jpg" class="img">
       </ion-col>
       <ion-col size="5">
         <ion-label>
-          <h2>Philip Mack</h2>
-          <h3>Good Work</h3>
-          <p>You are doing good job</p>
+          <h2>{{se.username}}</h2>
+          <h3>{{se.skill}}</h3>
+          <!-- <p>You are doing good job</p> -->
         </ion-label>
       </ion-col>
       <ion-col size="3">
         <p>
           <ion-icon name="location"></ion-icon>
-          France
+          {{se.city}}
         </p>
       </ion-col>
     </ion-row>

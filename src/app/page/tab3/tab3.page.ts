@@ -24,6 +24,7 @@ export class Tab3Page implements OnInit {
     autoplay: true
   };
   allSkilllist:any;
+  skillName:any;
   reviewList: any;
   constructor(private router: Router,
     public alertCtrl: AlertController,
@@ -42,8 +43,8 @@ export class Tab3Page implements OnInit {
   onSearch() {
     this.router.navigate(['/', 'search'])
   }
-  onskillCategory() {
-    this.router.navigate(['/', 'skillcategory'])
+  onskillCategory(value) {
+    this.router.navigate(['/', 'skillcategory'],{ queryParams: { skill: value.skill_name} })
   }
 
   sliderImages1 = [
