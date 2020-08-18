@@ -35,6 +35,8 @@ export class Tab2Page implements OnInit {
   usertoken: any
   otherFavourList: any = [];
   other_favour: any;
+  bio: any;
+  getJobList: any = [];
   constructor(private router: Router,
     public alertCtrl: AlertController,
     private http: Http,
@@ -49,6 +51,7 @@ export class Tab2Page implements OnInit {
       this.usertoken = this.userdetailes.Token.token
       this.createprofile = false
       this.getSkilllist();
+      this.getJobTitle();
       this.getQualification();
       this.getotherfavours();
       this.api_service.user.token
@@ -56,6 +59,7 @@ export class Tab2Page implements OnInit {
       this.usertoken = this.userdetailes.token
       this.createprofile = true
       this.getSkilllist();
+      this.getJobTitle();
       this.getQualification()
       this.getotherfavours();
       this.api_service.user.token
@@ -213,6 +217,26 @@ export class Tab2Page implements OnInit {
         });
   }
 
+  // job title
+  getJobTitle() {
+    var token = this.usertoken
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
+
+    console.log(headers);
+    this.http.get(this.api_service.API_BASE + 'api/job/skill/' + this.id, { headers: headers })
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.getJobList = res;
+      },
+        error => {
+          console.log('here error', error);
+        });
+  }
+
+
   // qualificationlist
   async getQualification() {
     var token = this.usertoken
@@ -233,6 +257,7 @@ export class Tab2Page implements OnInit {
   }
 
   async getotherfavours() {
+    debugger
     var token = this.usertoken
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -251,46 +276,8 @@ export class Tab2Page implements OnInit {
   }
 
 
-  getJobTitle() {
 
-    var token = this.usertoken
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Authorization", "Bearer " + token);
 
-    console.log(headers);
-    this.http.get(this.api_service.API_BASE + 'api/job/skill/' + this.id, { headers: headers })
-      .map((response) => response.json())
-      .subscribe((res) => {
-        console.log(res);
-        this.otherFavourList = res;
-      },
-        error => {
-          console.log('here error', error);
-        });
-  }
-
-  async onLogout() {
-    // localStorage.clear()
-    // this.router.navigate(['/', 'login'])
-    const alert = await this.alertCtrl.create({
-      message: "Do you really want to logout ?",
-      buttons: [
-        {
-          text: "YES",
-          handler: data => {
-            this.router.navigate(['/', 'login'])
-            localStorage.clear();
-            // this.api_service.toaster('logout successfully')
-          }
-        },
-        {
-          text: "NO"
-        }
-      ]
-    });
-    await alert.present();
-  }
 
   // updateprofile
   async onUpdate() {
@@ -301,10 +288,11 @@ export class Tab2Page implements OnInit {
     headers.append("Authorization", token);
     let options: any = { headers: headers };
 
-    if (this.fname && this.lname && this.skill && this.job && this.city && this.pincode && this.qualification && this.other_favour) {
+    if (this.fname && this.lname && this.bio && this.skill && this.job && this.city && this.pincode && this.qualification && this.other_favour) {
       let userObj = {
         fname: this.fname,
         lname: this.lname,
+        bio: this.bio,
         skill: this.skill,
         job: this.job,
         city: this.city,
@@ -354,5 +342,25 @@ export class Tab2Page implements OnInit {
     this.createprofile = false
 
   }
-
+  async onLogout() {
+    // localStorage.clear()
+    // this.router.navigate(['/', 'login'])
+    const alert = await this.alertCtrl.create({
+      message: "Do you really want to logout ?",
+      buttons: [
+        {
+          text: "YES",
+          handler: data => {
+            this.router.navigate(['/', 'login'])
+            localStorage.clear();
+            // this.api_service.toaster('logout successfully')
+          }
+        },
+        {
+          text: "NO"
+        }
+      ]
+    });
+    await alert.present();
+  }
 }

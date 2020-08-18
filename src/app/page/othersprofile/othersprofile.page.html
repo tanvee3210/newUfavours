@@ -46,37 +46,20 @@
       </ion-row>
 
       <div padding class="div33">
-        <!-- <ion-item
-          style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;  margin-top: 10px;">
-          <ion-input type="text" [(ngModel)]="data" placeholder="Name"></ion-input>
-        </ion-item>
-        <br>
-        <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;  ">
-          <ion-input type="text" ng placeholder="Job title"></ion-input>
-        </ion-item>
-        <br> -->
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
-          <ion-input type="text" placeholder="Location"></ion-input>
+          <ion-input type="text" placeholder="Location" [disabled]="true"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
           <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
           <ion-label>Other Favours</ion-label>
-          <ion-select value="dog">
-            <ion-select-option value="cat">Shopping</ion-select-option>
-            <ion-select-option value="dog">Cleaning</ion-select-option>
-            <ion-select-option value="dog">Company</ion-select-option>
-            <ion-select-option value="dog">Gardening</ion-select-option>
-          </ion-select>
+          <ion-input type="text" [disabled]="true" [(ngModel)]="other_favour"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
           <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
           <ion-label>Qualifications/Certifications</ion-label>
-          <ion-select value="dog">
-            <ion-select-option value="cat">xyz</ion-select-option>
-            <ion-select-option value="dog">zbc</ion-select-option>
-          </ion-select>
+          <ion-input type="text" [disabled]="true" [(ngModel)]="qualification"></ion-input>
         </ion-item>
       </div>
     </div>
