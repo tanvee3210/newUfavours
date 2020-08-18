@@ -13,6 +13,8 @@ import { HttpModule } from '@angular/http'
 import { ApiServiceService } from './api-service.service';
 import { TabsService } from './tabs.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +25,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
     Camera,
     TabsService,
     SplashScreen,
+    Geolocation,
+    AndroidPermissions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
     ApiServiceService,
   ],

@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { ToastController, LoadingController } from '@ionic/angular';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +15,11 @@ export class ApiServiceService {
   loader = null;
   selectedChatUser: any = []
   selectedThread: any = null;
+  loggedInuserLocations: any = { lat: 22.7777, lng: 78.783638 };
+  loggedInuserLocations2: any = { lat: 0, lng: 0 };
   // _isLoggedIn: boolean;
 
-  constructor(public alertCtrl: AlertController, public http: HttpClient, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {
+  constructor(public alertCtrl: AlertController, public http: HttpClient, private geolocation: Geolocation, private androidPermissions: AndroidPermissions, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {
     let userExist = localStorage.getItem('userDetails');
     //   console.log('user', userExist);
     if (userExist && userExist != 'undefined') {
@@ -72,9 +76,44 @@ export class ApiServiceService {
     localStorage.setItem('userDetails', JSON.stringify(this.user));
   }
 
-  async clickLogin() {
 
-  }
+  // Loccation
+  // getLocation() {
+  //   let self = this;
+  //   this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+  //     async result3 => {
+  //       //console.log('Has Location permission?', result3.hasPermission);
+  //       if (result3.hasPermission) {
+  //         this.geolocation.getCurrentPosition().then((resp) => {
+  //           // resp.coords.latitude
+  //           // resp.coords.longitude
+  //           if (resp) {
+  //             self.loggedInuserLocations.lat = resp.coords.latitude;
+  //             self.loggedInuserLocations.lng = resp.coords.longitude;
+  //             self.loggedInuserLocations2.lat = resp.coords.latitude;
+  //             self.loggedInuserLocations2.lng = resp.coords.longitude;
+  //           }
+  //           //console.log('A location 1', resp);
+
+  //         }).catch((error) => {
+  //           //console.log('Error getting location', error);
+  //         });
+
+  //         let watch = this.geolocation.watchPosition();
+  //         watch.subscribe((data) => {
+  //           if (data && data.coords && data.coords.latitude) {
+  //             self.loggedInuserLocations.lat = data.coords.latitude;
+  //             self.loggedInuserLocations.lng = data.coords.longitude;
+  //             self.loggedInuserLocations2.lat = data.coords.latitude;
+  //             self.loggedInuserLocations2.lng = data.coords.longitude;
+  //           }
+  //         });
+  //       } else {
+  //         this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION])
+  //       }
+  //     }
+  //   );
+  // };
 }
 
 

@@ -20,6 +20,10 @@
     </ion-item>
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;">
+      <ion-input type="text" placeholder="Bio" [(ngModel)]="bio"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;">
       <!-- <ion-input type="password" placeholder="Skill Catagory(s) "></ion-input> -->
       <ion-label>Skills</ion-label>
       <ion-select value="" [(ngModel)]="skill" (ionChange)="getJobSkill()">
@@ -28,6 +32,10 @@
     </ion-item>
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;">
+      <!-- <ion-input type="text" placeholder="Current job title" [(ngModel)]="job"></ion-input> -->
+      <ion-label>Job Title</ion-label>
+      <ion-select value="" [(ngModel)]="job">
+        <ion-select-option *ngFor="let list of getJobList">{{list.job}}</ion-select-option>
       <!-- <ion-input type="password" placeholder="Skill Catagory(s) "></ion-input> -->
       <ion-label>Current job title</ion-label>
       <ion-select value="" [(ngModel)]="job">
@@ -123,7 +131,7 @@
         <ion-card class="cards">
           <h5 class="username">{{api_service.user.data.name}}</h5>
           <p class="userdes">{{api_service.user.data.job}}</p>
-          <p class="address">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam facilis.</p>
+          <p class="address">{{api_service.user.data.bio}}</p>
         </ion-card>
       </ion-row>
 
@@ -148,25 +156,15 @@
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
-          <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
-          <!-- <ion-label>Qualifications/Certifications</ion-label> -->
           <ion-input type="text" [disabled]="true" [(ngModel)]="qualification"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey;">
           <ion-input type="password" placeholder="Reviews/Testimonials" [disabled]="true">
           </ion-input>
-          <!-- <ion-icon name="add" class="add"></ion-icon> -->
         </ion-item>
       </div>
     </div>
-    <!-- <div padding>
-      <ion-button expand="block" class="message" (click)="validation('message')" routerDirection="forward">Message
-      </ion-button>
-    </div>
-    <div padding>
-      <ion-button expand="block" (click)="validation('validation')" class="time">Time Validation</ion-button>
-    </div> -->
     <div padding>
       <ion-button expand="block" class="time" (click)="onLogout()">Logout</ion-button>
     </div>
