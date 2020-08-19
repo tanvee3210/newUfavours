@@ -22,7 +22,7 @@ export class RegistrationPage implements OnInit {
   hideicon2 = true
   hideicon3 = true
   newuser = true
-
+  termsFlag:boolean=true;
   email: any
   password: any
   newemail: any
@@ -163,5 +163,9 @@ export class RegistrationPage implements OnInit {
       this.hideicon3 = true
       this.inputpassword2 = 'password'
     }
+  }
+
+  checkTerms(){
+    this.termsFlag = !this.termsFlag
   }
 }

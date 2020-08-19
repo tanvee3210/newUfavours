@@ -22,7 +22,7 @@
   <!-- <div>
     <ion-spinner></ion-spinner>
   </div> -->
-  
+
   <div [ngSwitch]="notification">
     <ion-list *ngSwitchCase="'for'">
       <ion-card *ngFor="let list of requestForMe">
@@ -51,10 +51,16 @@
             <p class="address">{{list.task_details}}</p>
           </ion-col>
           <ion-col size="3">
-            <p class="status"><img src="../../../assets/images/Ufavoursimages/approvedicon.png" alt="" class="iconss">
-              <small class="greenColor" *ngIf="list && list.status == 'approved'">{{list.status}}</small>
-              <small class="yellowColor" *ngIf="list && list.status == 'pending'">{{list.status}}</small>
-              <small class="redColor" *ngIf="list && list.status == 'reject'">{{list.status}}</small>
+            <p class="status" *ngIf="list && list.status == 'approved'"><img
+                src="../../../assets/images/Ufavoursimages/approvedicon.png" alt="" class="iconss">
+              <small class="greenColor">{{list.status}}</small></p>
+            <p class="status" *ngIf="list && list.status == 'pending'"><img
+                src="../../../assets/images/Ufavoursimages/pendingicon.png" alt="" class="iconss">
+              <small class="yellowColor" >{{list.status}}</small>
+            </p>
+            <p class="status"  *ngIf="list && list.status == 'reject'"><img
+                src="../../../assets/images/Ufavoursimages/declineicon.png" alt="" class="iconss">
+              <small class="redColor">{{list.status}}</small>
             </p>
           </ion-col>
         </ion-row>
