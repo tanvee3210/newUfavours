@@ -83,7 +83,7 @@ export class ReviewPage implements OnInit {
         this.api_service.hideLoader();
         if (this.review) {
           const alert = await this.alertCtrl.create({
-            message: "Add Review Successfully!.",
+            message: "Review is updated Successfully!.",
             buttons: [
               {
                 text: "OK",
@@ -94,11 +94,11 @@ export class ReviewPage implements OnInit {
             ]
           })
           await alert.present();
-          
+          this.router.navigate(['/', 'tab5'])
         }
 
         error => {
-          console.log('here error', error);  
+          console.log('here error', error);
           this.api_service.hideLoader();
         }
       });

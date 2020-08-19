@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TabsService } from './tabs.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private androidPermissions: AndroidPermissions,
     public tabs: TabsService
   ) {
     this.initializeApp();
@@ -30,4 +32,7 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+
+
 }

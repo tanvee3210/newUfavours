@@ -128,9 +128,14 @@ export class RegistrationPage implements OnInit {
 
   }
 
-  async userregister(data) {
-
-    localStorage.setItem('userDetails', JSON.stringify(data.data));
+  async userregister(d1: any) {
+    let u = {
+      Token: { token: d1.data.token },
+      data: d1.data
+    };
+    this.api_service.user = u;
+    console.log("here check", u);
+    this.api_service.updateUser();
     this.router.navigate(['/', 'tab2'])
   }
 

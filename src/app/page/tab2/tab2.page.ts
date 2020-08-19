@@ -21,7 +21,9 @@ export class Tab2Page implements OnInit {
   qualificationList: any = [];
   fname: any;
   lname: any;
+  name: any;
   skill: any;
+  location: any;
   id: any;
   job: any;
   city: any;
@@ -32,7 +34,6 @@ export class Tab2Page implements OnInit {
   _isMobileDevice = true;
   userdetailes: any
   data: any = {}
-  usertoken: any
   otherFavourList: any = [];
   other_favour: any;
   bio: any;
@@ -48,24 +49,27 @@ export class Tab2Page implements OnInit {
     public api_service: ApiServiceService) { }
 
   ionViewDidEnter() {
-    this.userdetailes = JSON.parse(localStorage.getItem("userDetails"))
-    if (this.userdetailes.data) {
-      this.data = this.userdetailes && this.userdetailes.data && this.userdetailes.data.name
-      this.usertoken = this.userdetailes.Token.token
+    this.userdetailes = this.api_service.user;
+    console.log('user', this.api_service.user);
+    /*if (this.api_service.user.hasOwnProperty('Token')) {
+      //RELOGIN HERE
+      localStorage.clear();
+      this.router.navigate(['/', 'login'])
+    } else {
+      this.getUserDetails();
+    }*/
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.first_name && this.api_service.user.data.last_name) {
       this.createprofile = false
       this.getSkilllist();
       this.getQualification();
       this.getotherfavours();
-      this.api_service.user.token
     } else {
-      this.usertoken = this.userdetailes.token
       this.createprofile = true
       this.getSkilllist();
       this.getQualification()
       this.getotherfavours();
-      this.api_service.user.token
-
     }
+    this.getUserDetails();
     //HERE UPDATE FOR SHOW
     if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.other_favour) {
       this.other_favour = this.api_service.user.data.other_favour;
@@ -73,13 +77,22 @@ export class Tab2Page implements OnInit {
     if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.qualification) {
       this.qualification = this.api_service.user.data.qualification;
     }
-    this.getUserDetails();
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.name) {
+      this.name = this.api_service.user.data.name;
+    }
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.job) {
+      this.job = this.api_service.user.data.job;
+    }
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.location) {
+      this.location = this.api_service.user.data.location;
+    }
+
   }
   ngOnInit() {
 
   }
   setUserDetails(userDetails) {
-    this.getJobSkill(this.userdetailes.data.skill);
+    this.getJobSkill(userDetails.skill);
     this.fname = userDetails.first_name
     this.lname = userDetails.last_name
     this.bio = userDetails.bio
@@ -92,13 +105,14 @@ export class Tab2Page implements OnInit {
     this.other_favour = userDetails.other_favour
   }
   onEdit() {
-    this.setUserDetails(this.userdetailes.data);
+    this.setUserDetails(this.api_service.user.data);
     this.createprofile = true
   }
 
   onSearch() {
     this.router.navigate(['/', 'search'])
   }
+
   async openCameraOption() {
     let alert = await this.alertCtrl.create({
       header: " Select Image",
@@ -153,7 +167,7 @@ export class Tab2Page implements OnInit {
           self.imgToUpload = imageData;
           self.imgToUpload = "data:image/png;base64," + self.imgToUpload;
           // self.imgs.push("data:image/png;base64," + self.imgToUpload);
-          //   self.uploadImage(self.imgToUpload)
+          // self.uploadImage(self.imgToUpload)
           // self.profile_image = "data:image/png;base64," + self.imgToUpload;
 
           self._ngZone.run(() => {
@@ -161,9 +175,9 @@ export class Tab2Page implements OnInit {
             // self.updateimg = self.imgToUpload;
             self.imgToUpload = "data:image/png;base64," + self.imgToUpload;
             // self.imgs.push("data:image/png;base64," + self.imgToUpload);
-            //   self.uploadImage(self.imgToUpload)
+            // self.uploadImage(self.imgToUpload)
             // self.profile_image = self.sanitizer.bypassSecurityTrustResourceUrl(
-            //   "data:image/png;base64," + self.imgToUpload
+            // "data:image/png;base64," + self.imgToUpload
             // );
           });
         },
@@ -177,7 +191,7 @@ export class Tab2Page implements OnInit {
     }
 
     // self.imgToUpload = this.getHardCodeCameraImage();
-    // self.imgToUpload = 'data:image/png;base64,' +  self.imgToUpload
+    // self.imgToUpload = 'data:image/png;base64,' + self.imgToUpload
     // self.imgs = "data:image/png;base64," + self.imgToUpload;
     // self.uploadImage(self.imgToUpload)
   }
@@ -222,7 +236,7 @@ export class Tab2Page implements OnInit {
 
   // skilllist
   async getSkilllist() {
-    let token = this.usertoken
+    let token = this.api_service.user.Token.token;
     // console.log('token', token)
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -244,17 +258,15 @@ export class Tab2Page implements OnInit {
 
   // jobtitle
   getJobSkill(value) {
-    debugger
+
     if (!value) {
       return
     }
 
     let skillId = this.Skilllist.find(s => s.skill_name == value)
-    let token = this.userdetailes.token
-    // console.log('token', token)
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append("Authorization", "Bearer " + token);
+    headers.append("Authorization", "Bearer " + this.api_service.user.Token.token);
 
     console.log(headers);
     this.http.get(this.api_service.API_BASE + 'api/job/skill/' + skillId.id, { headers: headers })
@@ -271,10 +283,9 @@ export class Tab2Page implements OnInit {
 
   // qualificationlist
   async getQualification() {
-    var token = this.usertoken
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append("Authorization", "Bearer " + token);
+    headers.append("Authorization", "Bearer " + this.api_service.user.Token.token);
 
     console.log(headers);
     this.http.get(this.api_service.API_BASE + 'api/qualification', { headers: headers })
@@ -289,10 +300,9 @@ export class Tab2Page implements OnInit {
   }
 
   async getotherfavours() {
-    var token = this.usertoken
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append("Authorization", "Bearer " + token);
+    headers.append("Authorization", "Bearer " + this.api_service.user.Token.token);
 
     console.log(headers);
     this.http.get(this.api_service.API_BASE + 'api/other_favours ', { headers: headers })
@@ -308,11 +318,9 @@ export class Tab2Page implements OnInit {
 
   // updateprofile
   async onUpdate() {
-    let token = this.usertoken;
-    token = "Bearer " + token;
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append("Authorization", token);
+    headers.append("Authorization", "Bearer " + this.api_service.user.Token.token);
     let options: any = { headers: headers };
 
     if (this.fname && this.lname && this.bio && this.skill && this.job && this.city && this.pincode && this.qualification && this.other_favour) {
@@ -371,10 +379,11 @@ export class Tab2Page implements OnInit {
 
   async getUserDetails() {
     if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.id) {
-      var token = this.api_service.user.Token.token;
+      let token = this.api_service.user.Token.token;
+      token = "Bearer " + token;
       let headers = new Headers();
       headers.append("Content-Type", "application/json");
-      headers.append("Authorization", "Bearer " + token);
+      headers.append("Authorization", token.toString());
 
       console.log(headers);
       this.http.get(this.api_service.API_BASE + 'api/details', { headers: headers })
@@ -383,6 +392,11 @@ export class Tab2Page implements OnInit {
           console.log(res);
           if (res && res.data && res.data.averageRating) {
             this.avgRating = res.data.averageRating;
+          }
+          if (res && res.data && res.data.id) {
+            this.api_service.user.data = res.data;
+            console.log('user', this.api_service.user);
+            this.api_service.updateUser();
           }
         },
           error => {
