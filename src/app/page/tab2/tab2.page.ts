@@ -36,8 +36,10 @@ export class Tab2Page implements OnInit {
   otherFavourList: any = [];
   other_favour: any;
   bio: any;
-  jobList:any=[];
+  jobList: any = [];
   getJobList: any = [];
+  avgRating: any = 0;
+
   constructor(private router: Router,
     public alertCtrl: AlertController,
     private http: Http,
@@ -55,9 +57,6 @@ export class Tab2Page implements OnInit {
       this.getQualification();
       this.getotherfavours();
       this.api_service.user.token
-      
-    
-     
     } else {
       this.usertoken = this.userdetailes.token
       this.createprofile = true
@@ -69,28 +68,37 @@ export class Tab2Page implements OnInit {
 
     }
     //HERE UPDATE FOR SHOW
-    this.other_favour = this.api_service.user.data.other_favour;
-    this.qualification = this.api_service.user.data.qualification;
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.other_favour) {
+      this.other_favour = this.api_service.user.data.other_favour;
+    }
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.qualification) {
+      this.qualification = this.api_service.user.data.qualification;
+    }
+    this.getUserDetails();
   }
   ngOnInit() {
 
   }
-  setUserDetails(userDetails){
+  setUserDetails(userDetails) {
     this.getJobSkill(this.userdetailes.data.skill);
     this.fname = userDetails.first_name
-    this.lname =userDetails.last_name
-     this.bio=userDetails.bio
-     this.skill=userDetails.skill
-     this.job=userDetails.job
-     this.city=userDetails.city
-     this.pincode=userDetails.pincode
-     this.qualification=userDetails.qualification
-     this.imgToUpload=userDetails.picture
-     this.other_favour =userDetails.other_favour
+    this.lname = userDetails.last_name
+    this.bio = userDetails.bio
+    this.skill = userDetails.skill
+    this.job = userDetails.job
+    this.city = userDetails.city
+    this.pincode = userDetails.pincode
+    this.qualification = userDetails.qualification
+    this.imgToUpload = userDetails.picture
+    this.other_favour = userDetails.other_favour
   }
   onEdit() {
     this.setUserDetails(this.userdetailes.data);
     this.createprofile = true
+  }
+
+  onSearch() {
+    this.router.navigate(['/', 'search'])
   }
   async openCameraOption() {
     let alert = await this.alertCtrl.create({
@@ -140,7 +148,7 @@ export class Tab2Page implements OnInit {
   chooseImage(type) {
     var self = this;
     if (this.isMobileDevice()) {
-      var options = self.GetPictureOption(parseInt(type));
+      var options = this.GetPictureOption(parseInt(type));
       self.camera.getPicture(options).then(
         function (imageData) {
           self.imgToUpload = imageData;
@@ -234,25 +242,29 @@ export class Tab2Page implements OnInit {
         });
   }
 
-  // job title
-  // getJobTitle() {
-  //   var token = this.usertoken
-  //   let headers = new Headers();
-  //   headers.append("Content-Type", "application/json");
-  //   headers.append("Authorization", "Bearer " + token);
 
-  //   console.log(headers);
-  //   this.http.get(this.api_service.API_BASE + 'api/job/skill/' + this.id, { headers: headers })
-  //     .map((response) => response.json())
-  //     .subscribe((res) => {
-  //       console.log(res);
-  //       this.getJobList = res;
-  //     },
-  //       error => {
-  //         console.log('here error', error);
-  //       });
-  // }
+  // jobtitle
+  getJobSkill(value) {
+    debugger
+    let skillId = this.Skilllist.find(s => s.skill_name == value)
+    let token = this.userdetailes.Token.token
+    // console.log('token', token)
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + token);
 
+    console.log(headers);
+    this.http.get(this.api_service.API_BASE + 'api/job/skill/' + skillId.id, { headers: headers })
+      .map((response) => response.json())
+      .subscribe((res) => {
+        console.log(res);
+        this.jobList = res.data;
+      },
+        error => {
+          console.log('here error', error);
+        });
+
+  }
 
   // qualificationlist
   async getQualification() {
@@ -290,30 +302,6 @@ export class Tab2Page implements OnInit {
           console.log('here error', error);
         });
   }
-
-  getJobSkill(value){
-    debugger
-    let skillId= this.Skilllist.find(s=> s.skill_name == value)
-    let token = this.userdetailes.Token.token
-    // console.log('token', token)
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Authorization", "Bearer " + token);
-
-    console.log(headers);
-    this.http.get(this.api_service.API_BASE + 'api/job/skill/'+ skillId.id,{ headers: headers })
-      .map((response) => response.json())
-      .subscribe((res) => {
-        console.log(res);
-        this.jobList = res.data;
-      },
-        error => {
-          console.log('here error', error);
-        });
-
-  }
-
-
 
   // updateprofile
   async onUpdate() {
@@ -376,8 +364,30 @@ export class Tab2Page implements OnInit {
     })
     await alert.present();
     this.createprofile = false
-
   }
+
+  async getUserDetails() {
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.id) {
+      var token = this.api_service.user.Token.token;
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("Authorization", "Bearer " + token);
+
+      console.log(headers);
+      this.http.get(this.api_service.API_BASE + 'api/details', { headers: headers })
+        .map((response) => response.json())
+        .subscribe((res) => {
+          console.log(res);
+          if (res && res.data && res.data.averageRating) {
+            this.avgRating = res.data.averageRating;
+          }
+        },
+          error => {
+            console.log('here error', error);
+          });
+    }
+  }
+
   async onLogout() {
     // localStorage.clear()
     // this.router.navigate(['/', 'login'])
@@ -387,8 +397,8 @@ export class Tab2Page implements OnInit {
         {
           text: "YES",
           handler: data => {
-            this.router.navigate(['/', 'login'])
             localStorage.clear();
+            this.router.navigate(['/', 'login'])
             // this.api_service.toaster('logout successfully')
           }
         },
