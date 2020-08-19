@@ -33,9 +33,10 @@ export class Tab2Page implements OnInit {
   userdetailes: any
   data: any = {}
   usertoken: any
-  otherFavourList: any;
+  otherFavourList: any = [];
   other_favour: any;
   bio: any;
+  jobList: any = [];
   getJobList: any = [];
   avgRating: any = 0;
 
@@ -53,7 +54,6 @@ export class Tab2Page implements OnInit {
       this.usertoken = this.userdetailes.Token.token
       this.createprofile = false
       this.getSkilllist();
-      this.getJobTitle();
       this.getQualification();
       this.getotherfavours();
       this.api_service.user.token
@@ -61,7 +61,7 @@ export class Tab2Page implements OnInit {
       this.usertoken = this.userdetailes.token
       this.createprofile = true
       this.getSkilllist();
-      this.getJobTitle();
+      // this.getJobTitle();
       this.getQualification()
       this.getotherfavours();
       this.api_service.user.token
@@ -79,7 +79,21 @@ export class Tab2Page implements OnInit {
   ngOnInit() {
 
   }
+  setUserDetails(userDetails) {
+    this.getJobSkill(this.userdetailes.data.skill);
+    this.fname = userDetails.first_name
+    this.lname = userDetails.last_name
+    this.bio = userDetails.bio
+    this.skill = userDetails.skill
+    this.job = userDetails.job
+    this.city = userDetails.city
+    this.pincode = userDetails.pincode
+    this.qualification = userDetails.qualification
+    this.imgToUpload = userDetails.picture
+    this.other_favour = userDetails.other_favour
+  }
   onEdit() {
+    this.setUserDetails(this.userdetailes.data);
     this.createprofile = true
   }
 
@@ -228,25 +242,29 @@ export class Tab2Page implements OnInit {
         });
   }
 
-  // job title
-  getJobTitle() {
-    var token = this.usertoken
+
+  // jobtitle
+  getJobSkill(value) {
+    debugger
+    let skillId = this.Skilllist.find(s => s.skill_name == value)
+    let token = this.userdetailes.Token.token
+    // console.log('token', token)
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    this.http.get(this.api_service.API_BASE + 'api/job/skill/' + this.id, { headers: headers })
+    this.http.get(this.api_service.API_BASE + 'api/job/skill/' + skillId.id, { headers: headers })
       .map((response) => response.json())
       .subscribe((res) => {
         console.log(res);
-        this.getJobList = res;
+        this.jobList = res.data;
       },
         error => {
           console.log('here error', error);
         });
-  }
 
+  }
 
   // qualificationlist
   async getQualification() {
@@ -379,8 +397,8 @@ export class Tab2Page implements OnInit {
         {
           text: "YES",
           handler: data => {
-            this.router.navigate(['/', 'login'])
             localStorage.clear();
+            this.router.navigate(['/', 'login'])
             // this.api_service.toaster('logout successfully')
           }
         },
