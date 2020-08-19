@@ -61,7 +61,6 @@ export class Tab2Page implements OnInit {
       this.usertoken = this.userdetailes.token
       this.createprofile = true
       this.getSkilllist();
-      // this.getJobTitle();
       this.getQualification()
       this.getotherfavours();
       this.api_service.user.token
@@ -245,13 +244,13 @@ export class Tab2Page implements OnInit {
 
   // jobtitle
   getJobSkill(value) {
-
-    if(!value){
+    debugger
+    if (!value) {
       return
     }
-    
+
     let skillId = this.Skilllist.find(s => s.skill_name == value)
-    let token = this.userdetailes.Token.token
+    let token = this.userdetailes.token
     // console.log('token', token)
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
