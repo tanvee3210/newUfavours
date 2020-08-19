@@ -245,7 +245,11 @@ export class Tab2Page implements OnInit {
 
   // jobtitle
   getJobSkill(value) {
-    debugger
+
+    if(!value){
+      return
+    }
+    
     let skillId = this.Skilllist.find(s => s.skill_name == value)
     let token = this.userdetailes.Token.token
     // console.log('token', token)
