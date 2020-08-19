@@ -48,24 +48,17 @@ export class Tab2Page implements OnInit {
     public api_service: ApiServiceService) { }
 
   ionViewDidEnter() {
-    this.userdetailes = JSON.parse(localStorage.getItem("userDetails"))
-    if (this.userdetailes.data) {
-      this.data = this.userdetailes && this.userdetailes.data && this.userdetailes.data.name
-      this.usertoken = this.userdetailes.Token.token
+    this.userdetailes =this.api_service.user
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.first_name && this.api_service.user.data.last_name) {
       this.createprofile = false
       this.getSkilllist();
       this.getQualification();
       this.getotherfavours();
-      this.api_service.user.token
     } else {
-      this.usertoken = this.userdetailes.token
       this.createprofile = true
       this.getSkilllist();
-      // this.getJobTitle();
       this.getQualification()
       this.getotherfavours();
-      this.api_service.user.token
-
     }
     //HERE UPDATE FOR SHOW
     if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.other_favour) {
@@ -80,7 +73,7 @@ export class Tab2Page implements OnInit {
 
   }
   setUserDetails(userDetails) {
-    this.getJobSkill(this.userdetailes.data.skill);
+    this.getJobSkill(userDetails.skill);
     this.fname = userDetails.first_name
     this.lname = userDetails.last_name
     this.bio = userDetails.bio
@@ -93,7 +86,7 @@ export class Tab2Page implements OnInit {
     this.other_favour = userDetails.other_favour
   }
   onEdit() {
-    this.setUserDetails(this.userdetailes.data);
+    this.setUserDetails(this.api_service.user.data);
     this.createprofile = true
   }
 
@@ -223,7 +216,7 @@ export class Tab2Page implements OnInit {
 
   // skilllist
   async getSkilllist() {
-    let token = this.usertoken
+    let token = this.api_service.user.Token.token;
     // console.log('token', token)
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -251,7 +244,7 @@ export class Tab2Page implements OnInit {
     }
     
     let skillId = this.Skilllist.find(s => s.skill_name == value)
-    let token = this.userdetailes.Token.token
+    let token = this.api_service.user.Token.token
     // console.log('token', token)
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
