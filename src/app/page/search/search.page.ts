@@ -17,9 +17,9 @@ export class SearchPage implements OnInit {
   usertoken: any;
   userdetailes: any;
   jobTitleList: any = [];
-  searchData:any;
-  skill:any;
-  job:any;jobList:any=[]
+  searchData: any;
+  skill: any;
+  job: any; jobList: any = []
   constructor(private router: Router,
     public alertCtrl: AlertController,
     private http: Http,
@@ -28,7 +28,8 @@ export class SearchPage implements OnInit {
 
   ionViewDidEnter() {
     this.userdetailes = JSON.parse(localStorage.getItem("userDetails"))
-    console.log('userdetailes', this.userdetailes)
+    console.log('userdetailes', this.userdetailes);
+    this.api_service.getCurrentLocation();
     this.getSkilllist();
     // this.getJobTitle();
   }
@@ -36,15 +37,15 @@ export class SearchPage implements OnInit {
   ngOnInit() {
   }
   onLists() {
-    this.router.navigate(['/', 'othersprofile'],{ queryParams: { pagename: 'search' }})
+    this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename: 'search' } })
   }
   onBack() {
     this.router.navigate(['/', 'tab3'])
   }
 
   async getSkilllist() {
-    this.searchData=[];
-    this.job="";
+    this.searchData = [];
+    this.job = "";
     let token = this.userdetailes.Token.token
     // console.log('token', token)
     let headers = new Headers();
@@ -84,7 +85,7 @@ export class SearchPage implements OnInit {
         });
   }
 
-  getJobSkill(){
+  getJobSkill() {
     let token = this.userdetailes.Token.token
     // console.log('token', token)
     let headers = new Headers();
@@ -92,7 +93,7 @@ export class SearchPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    this.http.get(this.api_service.API_BASE + 'api/job/skill/'+ this.skill.id,{ headers: headers })
+    this.http.get(this.api_service.API_BASE + 'api/job/skill/' + this.skill.id, { headers: headers })
       .map((response) => response.json())
       .subscribe((res) => {
         console.log(res);
@@ -104,17 +105,17 @@ export class SearchPage implements OnInit {
 
   }
 
-  search(){
+  search() {
     let token = this.userdetailes.Token.token
     // console.log('token', token)
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", "Bearer " + token);
     console.log(headers);
-    let find:any={}
-      find.skill =this.skill.skill_name
-      find.job = this.job.job_name 
-    this.http.post(this.api_service.API_BASE + 'api/search',find,{ headers: headers ,body:find})
+    let find: any = {}
+    find.skill = this.skill.skill_name
+    find.job = this.job.job_name
+    this.http.post(this.api_service.API_BASE + 'api/search', find, { headers: headers, body: find })
       .map((response) => response.json())
       .subscribe((res) => {
         console.log(res);

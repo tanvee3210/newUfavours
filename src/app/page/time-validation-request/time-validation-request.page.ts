@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from '../../api-service.service';
 import { Http, Response, Headers } from '@angular/http';
 import { AlertController } from '@ionic/angular';
@@ -9,12 +9,12 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./time-validation-request.page.scss'],
 })
 export class TimeValidationRequestPage implements OnInit {
-  id:any;
-  requestData:any;
-  workingTime:any;
-  constructor(private router: Router,public route:ActivatedRoute,
+  id: any;
+  requestData: any;
+  workingTime: any;
+  constructor(private router: Router, public route: ActivatedRoute,
     public alertCtrl: AlertController,
-    public api_service: ApiServiceService,public http:Http) { }
+    public api_service: ApiServiceService, public http: Http) { }
 
   ngOnInit() {
   }
@@ -26,10 +26,10 @@ export class TimeValidationRequestPage implements OnInit {
       }
     });
   }
-  onBack(){
+  onBack() {
     this.router.navigate(['/', 'time-validation-accept'], { queryParams: { id: this.id } })
   }
-  getRequestData(){
+  getRequestData() {
     this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
@@ -37,7 +37,7 @@ export class TimeValidationRequestPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    this.http.get(this.api_service.API_BASE + 'api/request/'+this.id, { headers: headers })
+    this.http.get(this.api_service.API_BASE + 'api/request/' + this.id, { headers: headers })
       .map((response) => response.json())
       .subscribe((res) => {
         console.log(res);
@@ -50,7 +50,7 @@ export class TimeValidationRequestPage implements OnInit {
         });
   }
 
-  onRequest(){
+  onRequest() {
     this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
@@ -58,10 +58,10 @@ export class TimeValidationRequestPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    let data={
-      senderid:this.requestData.assign_to,
-      receiverid:this.requestData.assign_from,
-      worktime:this.workingTime
+    let data = {
+      senderid: this.requestData.assign_to,
+      receiverid: this.requestData.assign_from,
+      worktime: this.workingTime
     }
     this.http.post(this.api_service.API_BASE + 'api/proposeNewTime', data, { headers: headers })
       .map((response) => response.json())
@@ -82,7 +82,7 @@ export class TimeValidationRequestPage implements OnInit {
             ]
           })
           await alert.present();
-          
+
         }
       },
         error => {

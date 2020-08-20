@@ -22,7 +22,7 @@ export class RegistrationPage implements OnInit {
   hideicon2 = true
   hideicon3 = true
   newuser = true
-  termsFlag:boolean=true;
+  termsFlag: boolean = true;
   email: any
   password: any
   newemail: any
@@ -42,6 +42,9 @@ export class RegistrationPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+  onLogin() {
+    this.router.navigate(['/', 'login'])
   }
 
   Newuser() {
@@ -165,7 +168,7 @@ export class RegistrationPage implements OnInit {
     }
   }
 
-  checkTerms(){
+  checkTerms() {
     this.termsFlag = !this.termsFlag
   }
 }

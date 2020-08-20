@@ -54,7 +54,7 @@
     </ion-item>
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
-      <ion-input type="text" placeholder="Postcode" [(ngModel)]="pincode"></ion-input>
+      <ion-input type="number" placeholder="Postcode" [(ngModel)]="pincode"></ion-input>
     </ion-item>
   </div>
 
@@ -111,10 +111,14 @@
             <h5 class="h5">Time Received</h5>
           </ion-col>
           <ion-col size="6" class="cols">
-            <h5 class="h55">{{api_service.user.data.given_time}} hrs</h5>
+            <h5 class="h55" *ngIf="api_service.user.data.given_time && api_service.user.data.given_time > 0">
+              {{api_service.user.data.given_time}} hrs</h5>
+            <h5 class="h55" *ngIf="api_service.user.data.given_time < 0.1">---</h5>
           </ion-col>
           <ion-col size="6" class="cols">
-            <h5 class="h55">{{api_service.user.data.receive_time}} hrs</h5>
+            <h5 class="h55" *ngIf="api_service.user.data.receive_time && api_service.user.data.receive_time > 0">
+              {{api_service.user.data.receive_time}} hrs</h5>
+            <h5 class="h55" *ngIf="api_service.user.data.receive_time < 0.1">---</h5>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -138,11 +142,11 @@
       </ion-card>
     </ion-row>
     <div padding class="div33">
-      <ion-item
+      <!-- <ion-item
         style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; margin-top: 10px;">
         <ion-input type="text" [(ngModel)]="name" placeholder="Name" [disabled]="true"></ion-input>
       </ion-item>
-      <br>
+      <br> -->
       <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; ">
         <ion-input type="text" [(ngModel)]="job" placeholder="Job title" [disabled]="true"></ion-input>
       </ion-item>

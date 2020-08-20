@@ -33,12 +33,13 @@
         </div>
         <div class="checkbox" (ionChange)="checkTerms()">
           <ion-checkbox slot="start"></ion-checkbox>
-          <ion-label >I agree with the <span>Terms of Use</span> & <span>Privacy Policy</span>.</ion-label>
+          <ion-label>I agree with the <span>Terms of Use</span> & <span>Privacy Policy</span>.</ion-label>
         </div>
 
         <div padding>
           <ion-button expand="block" [disabled]="termsFlag" (click)="onSignup()">Next</ion-button>
         </div>
+        <p class="signup" (click)="onLogin()"><span>Login ?</span> </p>
       </ion-col>
     </ion-row>
   </ion-grid>

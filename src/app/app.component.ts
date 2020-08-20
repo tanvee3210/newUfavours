@@ -30,6 +30,15 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+        async res => {
+          console.log('Has Location permission?', res.hasPermission);
+          if (res.hasPermission) {
+            //here
+          } else {
+            this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION, this.androidPermissions.PERMISSION.CAMERA]);
+          }
+        });
     });
   }
 

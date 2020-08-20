@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
-import { HttpClient } from '@angular/common/http';
+import { Http, Response, Headers } from '@angular/http';
 import { AlertController } from '@ionic/angular';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
@@ -20,7 +20,7 @@ export class ApiServiceService {
   loggedInuserLocations2: any = { lat: 0, lng: 0 };
   // _isLoggedIn: boolean;
 
-  constructor(private nativeGeocoder: NativeGeocoder, public alertCtrl: AlertController, public http: HttpClient, private geolocation: Geolocation, private androidPermissions: AndroidPermissions, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {
+  constructor(private nativeGeocoder: NativeGeocoder, public alertCtrl: AlertController, public http: Http, private geolocation: Geolocation, private androidPermissions: AndroidPermissions, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {
     let userExist = localStorage.getItem('userDetails');
     //   console.log('user', userExist);
     if (userExist && userExist != 'undefined') {
@@ -78,6 +78,28 @@ export class ApiServiceService {
     this.getCurrentLocation();
   }
 
+  async updateUser2() {
+    console.log('user', this.user);
+    let token = this.user.Token.token;
+    token = "Bearer " + token;
+    console.log('Token', token);
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", token);
+    let options: any = { headers: headers };
+
+    this.http.post(this.API_BASE + 'api/update_profile', this.user.data, options)
+      .subscribe((data) => {
+        console.log(data);
+      },
+        (error) => {
+          console.log(error);
+        });
+
+    localStorage.setItem('userDetails', JSON.stringify(this.user));
+
+  }
+
   getDecimals(n: any) {
     const parts = n.toLocaleString('en-US', { maximumSignificantDigits: 18 }).split('.')
     return parts.length > 1 ? Number('0.' + parts[1]) : 0;
@@ -130,16 +152,37 @@ export class ApiServiceService {
         useLocale: true,
         maxResults: 1
       };
+      let self = this;
 
       this.nativeGeocoder.reverseGeocode(lat, lng, options)
-        .then((result: NativeGeocoderResult[]) => console.log(JSON.stringify(result[0])))
+        .then((result: NativeGeocoderResult[]) => {
+          console.log(JSON.stringify(result[0]));
+          if (result && result[0] && result[0].countryName) {
+            let address = result[0];
+            let location = '';
+            if (address.locality && address.locality != '') {
+              location += address.locality;
+            }
+            if (address.administrativeArea && address.administrativeArea != '') {
+              location += ', ' + address.administrativeArea;
+            }
+            if (address.countryName && address.countryName != '') {
+              location += ', ' + address.countryName;
+            }
+            if (address.postalCode && address.postalCode != '') {
+              location += ', ' + address.postalCode;
+            }
+            self.user.data.location = location;
+            console.log('Current Location', location);
+            self.updateUser2();
+          }
+        })
         .catch((error: any) => console.log(error));
 
       this.nativeGeocoder.forwardGeocode('Berlin', options)
         .then((result: NativeGeocoderResult[]) => console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude))
         .catch((error: any) => console.log(error));
     }
-
   }
 
   getCurrentLocation() {
@@ -157,16 +200,6 @@ export class ApiServiceService {
             }
           }).catch((error) => {
             console.log('Error getting location', error);
-          });
-        } else {
-          let watch = this.geolocation.watchPosition();
-          watch.subscribe((g: any) => {
-            console.log('location 2', g);
-            if (g && g.coords && g.coords.latitude) {
-              self.user.data.latitude = g.coords.latitude;
-              self.user.data.longitude = g.coords.longitude;
-              self.getAddressByLatLng(g.coords.latitude, g.coords.longitude);
-            }
           });
         }
       });

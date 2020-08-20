@@ -105,7 +105,7 @@ export class Tab2Page implements OnInit {
     this.other_favour = userDetails.other_favour
   }
   onEdit() {
-    this.setUserDetails(this.api_service.user.data);
+    // this.setUserDetails(this.api_service.user.data);
     this.createprofile = true
   }
 
