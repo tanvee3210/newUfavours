@@ -16,9 +16,8 @@ export class TimeValidationRequestPage implements OnInit {
     public alertCtrl: AlertController,
     public api_service: ApiServiceService, public http: Http) { }
 
+ 
   ngOnInit() {
-  }
-  ionViewWillEnter() {
     this.route.queryParams.subscribe(params => {
       if (params && params.id) {
         this.id = JSON.parse(params.id);
@@ -27,10 +26,11 @@ export class TimeValidationRequestPage implements OnInit {
     });
   }
   onBack() {
-    this.router.navigate(['/', 'time-validation-accept'], { queryParams: { id: this.id } })
+    this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename:'tab4',id: this.id } })
   }
-  getRequestData() {
-    this.api_service.showLoader();
+  
+  async getRequestData() {
+    await this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -39,10 +39,10 @@ export class TimeValidationRequestPage implements OnInit {
     console.log(headers);
     this.http.get(this.api_service.API_BASE + 'api/request/' + this.id, { headers: headers })
       .map((response) => response.json())
-      .subscribe((res) => {
+      .subscribe(async (res) => {
         console.log(res);
         this.requestData = res.data;
-        this.api_service.hideLoader();
+        await this.api_service.hideLoader();
       },
         error => {
           console.log('here error', error);
@@ -50,8 +50,8 @@ export class TimeValidationRequestPage implements OnInit {
         });
   }
 
-  onRequest() {
-    this.api_service.showLoader();
+  async onRequest() {
+    await this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -68,7 +68,7 @@ export class TimeValidationRequestPage implements OnInit {
       .subscribe(async (res) => {
         console.log(res);
         this.requestData = res;
-        this.api_service.hideLoader();
+        await this.api_service.hideLoader();
         if (this.requestData) {
           const alert = await this.alertCtrl.create({
             message: "Resquest Time Send Successfully!.",
@@ -82,7 +82,6 @@ export class TimeValidationRequestPage implements OnInit {
             ]
           })
           await alert.present();
-
         }
       },
         error => {

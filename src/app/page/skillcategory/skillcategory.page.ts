@@ -34,6 +34,7 @@ export class SkillcategoryPage implements OnInit {
 
   getDetails(){
     this.skillsCatDetails =[]
+    this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -45,12 +46,14 @@ export class SkillcategoryPage implements OnInit {
       }
     this.http.post(this.api_service.API_BASE + 'api/skills_userList',skillData ,{ headers: headers })
       .map((response) => response.json())
-      .subscribe((res) => {
+      .subscribe(async (res) => {
         console.log(res);
         this.skillsCatDetails = res;
+        await this.api_service.hideLoader();
       },
         error => {
           console.log('here error', error);
+          this.api_service.hideLoader()
         });
   }
 }

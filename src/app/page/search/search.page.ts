@@ -105,7 +105,8 @@ export class SearchPage implements OnInit {
 
   }
 
-  search() {
+  async search() {
+    await this.api_service.showLoader()
     let token = this.userdetailes.Token.token
     // console.log('token', token)
     let headers = new Headers();
@@ -117,12 +118,14 @@ export class SearchPage implements OnInit {
     find.job = this.job.job_name
     this.http.post(this.api_service.API_BASE + 'api/search', find, { headers: headers, body: find })
       .map((response) => response.json())
-      .subscribe((res) => {
+      .subscribe(async(res) => {
         console.log(res);
         this.searchData = res.data;
+        await this.api_service.hideLoader();
       },
         error => {
           console.log('here error', error);
+          this.api_service.hideLoader();
         });
 
   }
