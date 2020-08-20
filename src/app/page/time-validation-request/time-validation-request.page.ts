@@ -76,7 +76,7 @@ export class TimeValidationRequestPage implements OnInit {
               {
                 text: "OK",
                 handler: () => {
-                  this.onBack()
+                  this.router.navigate(['/', 'tab4'])
                 }
               }
             ]
