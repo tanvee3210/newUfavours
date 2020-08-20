@@ -414,8 +414,9 @@ export class Tab2Page implements OnInit {
         {
           text: "YES",
           handler: data => {
-            localStorage.clear();
+
             this.router.navigate(['/', 'login'])
+            localStorage.clear();
             // this.api_service.toaster('logout successfully')
           }
         },
