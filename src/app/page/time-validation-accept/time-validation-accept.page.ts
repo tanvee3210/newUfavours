@@ -16,8 +16,6 @@ export class TimeValidationAcceptPage implements OnInit {
     public api_service: ApiServiceService, public alertCtrl: AlertController, public http: Http) { }
 
   ngOnInit() {
-  }
-  ionViewWillEnter() {
     this.route.queryParams.subscribe(params => {
       if (params && params.id) {
         this.id = JSON.parse(params.id);
@@ -32,8 +30,8 @@ export class TimeValidationAcceptPage implements OnInit {
     this.router.navigate(['/', 'time-validation-request'], { queryParams: { id: this.timeData.task_id } })
   }
 
-  getRequestData() {
-    this.api_service.showLoader();
+   async getRequestData() {
+    await this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     // console.log('token', token)
     let headers = new Headers();
@@ -43,18 +41,19 @@ export class TimeValidationAcceptPage implements OnInit {
     console.log(headers);
     this.http.get(this.api_service.API_BASE + 'api/request/' + this.id, { headers: headers })
       .map((response) => response.json())
-      .subscribe((res) => {
+      .subscribe(async(res) => {
         console.log(res);
         this.timeData = res.data;
-        this.api_service.hideLoader();
+        await this.api_service.hideLoader();
       },
         error => {
           console.log('here error', error);
           this.api_service.hideLoader();
         });
   }
+  
   async acceptTime() {
-    this.api_service.showLoader();
+    await this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -72,7 +71,7 @@ export class TimeValidationAcceptPage implements OnInit {
       .subscribe(async (res) => {
         console.log(res);
         this.acceptTimeData = res.data;
-        this.api_service.hideLoader();
+        await this.api_service.hideLoader();
         if (this.acceptTimeData) {
           const alert = await this.alertCtrl.create({
             message: "Review is updated Successfully!.",

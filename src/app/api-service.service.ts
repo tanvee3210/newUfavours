@@ -49,7 +49,7 @@ export class ApiServiceService {
   }
 
   async hideLoader() {
-    await this.loader.dismiss();
+    this.loader = await this.loader.dismiss();
   }
 
   async validateEmail(email: any) {

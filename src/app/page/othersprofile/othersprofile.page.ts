@@ -10,16 +10,18 @@ import { ApiServiceService } from '../../api-service.service';
 export class OthersprofilePage implements OnInit {
   pageName: any;
   otherDetails: any;
+  location:any;
+  qualification:any;
+  other_favour:any;
   id: any;
 
   constructor(private router: Router, public route: ActivatedRoute,
     public http: Http,
     public api_service: ApiServiceService) { }
 
-  ngOnInit() {
-  }
+ 
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params && params.pagename) {
         this.pageName = params.pagename;
@@ -35,8 +37,8 @@ export class OthersprofilePage implements OnInit {
     this.router.navigate(['/', this.pageName])
   }
   //get Other user details using id
-   getOtherUserDetail() {
-    this.api_service.showLoader();
+   async getOtherUserDetail() {
+    await this.api_service.showLoader();
     let token = this.api_service.user.Token.token;
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -48,7 +50,11 @@ export class OthersprofilePage implements OnInit {
       .subscribe(async (res) => {
         console.log(res);
         this.otherDetails = res.data;
+        this.location = this.otherDetails.city
+        this.qualification = this.otherDetails.qualification
+        this.other_favour =this.otherDetails.other_favour
         await this.api_service.hideLoader();
+        
       },
         error => {
           console.log('here error', error);

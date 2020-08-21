@@ -48,19 +48,19 @@
 
       <div padding class="div33">
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
-          <ion-input type="text" placeholder="Location" [disabled]="true"></ion-input>
+          <ion-input type="text" placeholder="Location" [disabled]="true" [(ngModel)]="location"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
           <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
-          <ion-label>Other Favours</ion-label>
-          <ion-input type="text" [disabled]="true" [(ngModel)]="other_favour"></ion-input>
+          <!-- <ion-label>Other Favours</ion-label> -->
+          <ion-input type="text" placeholder="Other Favours" [disabled]="true" [(ngModel)]="other_favour"></ion-input>
         </ion-item>
         <br>
         <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; ">
           <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
-          <ion-label>Qualifications/Certifications</ion-label>
-          <ion-input type="text" [disabled]="true" [(ngModel)]="qualification"></ion-input>
+          <!-- <ion-label>Qualifications/Certifications</ion-label> -->
+          <ion-input type="text" placeholder="Qualifications/Certifications" [disabled]="true" [(ngModel)]="qualification"></ion-input>
         </ion-item>
       </div>
     </div>
