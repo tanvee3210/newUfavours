@@ -62,7 +62,7 @@ export class OthersprofilePage implements OnInit {
         });
   }
   timeValidationRequest() {
-    this.router.navigate(['/', 'time-validation-request'], { queryParams: { id: this.id } })
+    this.router.navigate(['/', 'time-validation-request'], { queryParams: {pageName:'other', id: this.id } })
   }
   onReviews() {
     this.router.navigate(['/', 'review'], { queryParams: { id: this.id } })

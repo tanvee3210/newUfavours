@@ -12,6 +12,7 @@ export class TimeValidationRequestPage implements OnInit {
   id: any;
   requestData: any;
   workingTime: any;
+  pageName:any;
   constructor(private router: Router, public route: ActivatedRoute,
     public alertCtrl: AlertController,
     public api_service: ApiServiceService, public http: Http) { }
@@ -23,10 +24,19 @@ export class TimeValidationRequestPage implements OnInit {
         this.id = JSON.parse(params.id);
         this.getRequestData();
       }
+      if(params && params.pageName){
+        this.pageName = params.pageName;
+      }
     });
   }
   onBack() {
-    this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename:'tab4',id: this.id } })
+    if(this.pageName == 'accept'){
+      this.router.navigate(['/', 'time-validation-accept'], { queryParams: { pagename:'tab4',id: this.id } })
+    }
+    if(this.pageName=='other'){
+      this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename:'tab4',id: this.id } })
+    }
+  
   }
   
   async getRequestData() {

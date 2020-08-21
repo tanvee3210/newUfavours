@@ -17,9 +17,6 @@ export class SkillcategoryPage implements OnInit {
     private http: Http) { }
 
   ngOnInit() {
-  }
-
-  ionViewWillEnter() {
     this.route.queryParams.subscribe(params => {
       if (params && params.skill) {
         this.skill = params.skill;

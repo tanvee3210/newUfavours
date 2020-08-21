@@ -19,8 +19,6 @@ export class FeedbackPage implements OnInit {
     public api_service: ApiServiceService,public http:Http) { }
 
   ngOnInit() {
-  }
-  ionViewWillEnter() {
     this.route.queryParams.subscribe(params => {
       if (params && params.id) {
         this.id = JSON.parse(params.id);
