@@ -28,6 +28,21 @@ img.profilepic {
     color: #ffffff;
 }
 
+// Applies a text wrap on ion options
+.alert-tappable.alert-radio {
+    height: auto;
+    contain: content;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+    white-space: normal;
+}
+
+.popover-content {
+    min-width: 90% !important;
+}
+
 .div4 {
     background: #333333;
     margin-top: 15px;

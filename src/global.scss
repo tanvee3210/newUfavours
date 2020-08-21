@@ -32,3 +32,14 @@
 .star-rating .fa {
     font-size: 20px !important;
 }
+
+// Applies a text wrap on ion options
+.alert-tappable.alert-radio {
+    height: auto;
+    contain: content;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+    white-space: normal;
+}

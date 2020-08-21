@@ -81,6 +81,7 @@ export class MessagePage implements OnInit {
         .map((response) => response.json())
         .subscribe((data) => {
           let newMsg: any = {};
+          this.message = ""
           if (data && data.data) {
             newMsg = data.data;
             newMsg.sender_name = this.api_service.user.data.username;
