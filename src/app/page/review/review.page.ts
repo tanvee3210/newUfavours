@@ -79,6 +79,7 @@ export class ReviewPage implements OnInit {
         this.review = res;
         this.api_service.hideLoader();
         if (this.review) {
+          this.message=""
           const alert = await this.alertCtrl.create({
             message: "Review is updated Successfully!.",
             buttons: [

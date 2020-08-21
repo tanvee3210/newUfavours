@@ -82,12 +82,15 @@ export class MessagePage implements OnInit {
         .subscribe((data) => {
           let newMsg: any = {};
           if (data && data.data) {
+         
             newMsg = data.data;
             newMsg.sender_name = this.api_service.user.data.username;
             newMsg.receiver_name = this.api_service.user.data.username;
             this.viewMessageList.push(newMsg);
           }
           this.getMessages(data);
+          this.message=""
+
         },
           (error) => {
             console.log(error);

@@ -56,6 +56,7 @@ export class SendMessagePage implements OnInit {
         this.sendMessage = res;
         this.api_service.hideLoader();
         if (this.sendMessage) {
+          this.message =''
           const alert = await this.alertCtrl.create({
             message: "Send Message Successfully!.",
             buttons: [
