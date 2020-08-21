@@ -39,7 +39,7 @@
       <ion-label>Current job title</ion-label>
 
       <!-- <ion-select value="" [(ngModel)]="job">
-  <!-- <ion-select-option>Default Job Title</ion-select-option> -->
+  <ion-select-option>Default Job Title</ion-select-option> -->
       <!-- <ion-select-option *ngFor="let list of jobList">{{list.job_name}}</ion-select-option> -->
       <ion-select [(ngModel)]="job">
         <ion-select-option [value]="list.job_name" *ngFor="let list of jobList">{{list.job_name}}</ion-select-option>
@@ -147,6 +147,7 @@
         <ion-input type="text" [(ngModel)]="name" placeholder="Name" [disabled]="true"></ion-input>
       </ion-item>
       <br> -->
+
       <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; ">
         <ion-input type="text" [(ngModel)]="job" placeholder="Job title" [disabled]="true"></ion-input>
       </ion-item>

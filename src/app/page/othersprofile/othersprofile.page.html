@@ -40,6 +40,7 @@
       <ion-row>
         <ion-card class="cards">
           <h5 class="username" *ngIf="otherDetails">{{otherDetails.name}}</h5>
+          <div class="star-rating" [innerHTML]="api_service.getStarMarks(avgRating)"></div>
           <p class="userdes" *ngIf="otherDetails">{{otherDetails.skill}}</p>
           <p class="address">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam facilis.</p>
         </ion-card>

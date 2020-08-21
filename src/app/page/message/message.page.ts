@@ -88,6 +88,7 @@ export class MessagePage implements OnInit {
             this.viewMessageList.push(newMsg);
           }
           this.getMessages(data);
+
         },
           (error) => {
             console.log(error);
@@ -108,7 +109,7 @@ export class MessagePage implements OnInit {
       ]
     })
     await alert.present();
-    this.router.navigate(['/', 'message'])
+    this.router.navigate(['/', 'tab1'])
   }
   // ionViewDidEnter() {
   // view message
