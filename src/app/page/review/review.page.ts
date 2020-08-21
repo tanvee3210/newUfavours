@@ -27,9 +27,6 @@ export class ReviewPage implements OnInit {
     public api_service: ApiServiceService) { }
 
   ngOnInit() {
-  }
-
-  ionViewWillEnter() {
     this.route.queryParams.subscribe(params => {
       if (params && params.id) {
         this.id = parseInt(params.id);
@@ -94,7 +91,7 @@ export class ReviewPage implements OnInit {
             ]
           })
           await alert.present();
-          this.router.navigate(['/', 'tab5'])
+          // this.router.navigate(['/', 'tab5'])
         }
 
         error => {

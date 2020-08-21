@@ -21,14 +21,13 @@ export class SendMessagePage implements OnInit {
     // private camera: Camera,
     public api_service: ApiServiceService) { }
 
-  ngOnInit() {
-  }
+ 
 
   onBack() {
     this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename: 'tab4', id: this.id } })
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params && params.id) {
         this.id = parseInt(params.id);

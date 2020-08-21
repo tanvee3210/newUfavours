@@ -27,7 +27,7 @@ export class TimeValidationAcceptPage implements OnInit {
     this.router.navigate(['/', 'feedback'], { queryParams: { id: this.timeData.task_id } })
   }
   onTime() {
-    this.router.navigate(['/', 'time-validation-request'], { queryParams: { id: this.timeData.task_id } })
+    this.router.navigate(['/', 'time-validation-request'], { queryParams: { pageName:'accept',id: this.timeData.task_id } })
   }
 
    async getRequestData() {
