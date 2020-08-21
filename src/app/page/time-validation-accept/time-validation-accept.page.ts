@@ -11,7 +11,8 @@ import { AlertController } from '@ionic/angular';
 export class TimeValidationAcceptPage implements OnInit {
   id: any;
   timeData: any;
-  acceptTimeData: any
+  acceptTimeData: any;
+  disableFlag:boolean=false;
   constructor(private router: Router, public route: ActivatedRoute,
     public api_service: ApiServiceService, public alertCtrl: AlertController, public http: Http) { }
 
@@ -44,6 +45,9 @@ export class TimeValidationAcceptPage implements OnInit {
       .subscribe(async(res) => {
         console.log(res);
         this.timeData = res.data;
+        if(this.timeData.accept_reject==2){
+          this.disableFlag =true
+        }
         await this.api_service.hideLoader();
       },
         error => {
@@ -60,7 +64,6 @@ export class TimeValidationAcceptPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    debugger
     let acceptData = {
       senderid: this.timeData.assign_to,
       receiverid: this.timeData.assign_from,
@@ -70,22 +73,22 @@ export class TimeValidationAcceptPage implements OnInit {
       .map((response) => response.json())
       .subscribe(async (res) => {
         console.log(res);
-        this.acceptTimeData = res.data;
+        this.acceptTimeData = res;
         await this.api_service.hideLoader();
         if (this.acceptTimeData) {
           const alert = await this.alertCtrl.create({
-            message: "Review is updated Successfully!.",
+            message: "Accept Request Successfully!.",
             buttons: [
               {
                 text: "OK",
                 handler: () => {
-                  // this.onBack()
+                  this.router.navigate(['/', 'tab4'])
                 }
               }
             ]
           })
           await alert.present();
-          this.router.navigate(['/', 'tab4'])
+          
         }
       },
         error => {

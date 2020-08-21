@@ -29,14 +29,14 @@
       <ion-item
         style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 47px;bottom: 15px;">
         <ion-label>Job Title</ion-label>
-        <ion-select placeholder="" [(ngModel)]="job" (ionChange)="search()">
+        <ion-select placeholder="" [(ngModel)]="job" >
           <ion-select-option [value]="job" *ngFor="let job of jobList">{{job.job_name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <br>
       <ion-item
         style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 45px;bottom: 30px;">
-        <ion-input type="text" placeholder="Location +/- 2.5 10 miles"></ion-input>
+        <ion-input type="text" [(ngModel)]="location" placeholder="Location +/- 2.5 10 miles" (ionChange)="search()"></ion-input>
       </ion-item>
       <br>
       <ion-item

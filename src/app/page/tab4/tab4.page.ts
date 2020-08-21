@@ -35,7 +35,7 @@ export class Tab4Page implements OnInit {
     this.router.navigate(['/', 'time-validation-accept'], { queryParams: { id: value.task_id } })
   }
   onRequestFromMe(value) {
-    this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename: 'tab4' ,id: value.assign_to} })
+    this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename: 'tab4' ,id: value.assign_to,t_id:value.task_id} })
   }
 
   // RequestForMe

@@ -14,6 +14,7 @@ export class OthersprofilePage implements OnInit {
   qualification:any;
   other_favour:any;
   id: any;
+  taskId:any;
 
   constructor(private router: Router, public route: ActivatedRoute,
     public http: Http,
@@ -30,6 +31,9 @@ export class OthersprofilePage implements OnInit {
         this.id = parseInt(params.id);
         this.getOtherUserDetail();
       }
+      if (params && params.t_id) {
+        this.taskId = params.t_id;
+      }
     });
   }
 
@@ -43,7 +47,6 @@ export class OthersprofilePage implements OnInit {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", "Bearer " + token);
-
     console.log(headers);
     this.http.get(this.api_service.API_BASE + 'api/get_user/' + this.id, { headers: headers })
       .map((response) => response.json())
@@ -62,7 +65,7 @@ export class OthersprofilePage implements OnInit {
         });
   }
   timeValidationRequest() {
-    this.router.navigate(['/', 'time-validation-request'], { queryParams: {pageName:'other', id: this.id } })
+    this.router.navigate(['/', 'time-validation-request'], { queryParams: {pageName:'other', id: this.taskId } })
   }
   onReviews() {
     this.router.navigate(['/', 'review'], { queryParams: { id: this.id } })
