@@ -30,9 +30,7 @@
 
     <ion-item style="margin-left: auto; margin-right: auto; margin-top: 50px; width: 90%;margin-bottom: 25px;">
 
-      <textarea name="textarea" cols="70" rows="2" class="searchBox" id="textarea"
-        onfocus="if(this.value == 'Please describe why') this.value='';"
-        onblur="if(this.value == '') this.value='Please describe why';">Please describe why</textarea>
+      <ion-textarea rows="6" [(ngModel)]="message" cols="20" placeholder="Type Message here..."></ion-textarea>
     </ion-item>
     <ion-button expand="block" (click)="onSend()">Send Message</ion-button>
   </ion-row>

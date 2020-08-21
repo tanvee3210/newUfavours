@@ -17,7 +17,10 @@
     <ion-slides class="slides" [options]="slideOpts1">
       <ion-slide class="ion-slide" *ngFor="let list of allSkilllist" (click)="onskillCategory(list)">
         <ion-avatar>
-          <img src="{{list.img}}" (click)="sliderGo(list)">
+          <!-- <img src="{{public/assets/images/skills/list.image}}" (click)="sliderGo(list)"> -->
+          <!-- <img [src]="'{public/assets/images/skills/' + list.image + '.png'"> -->
+
+          <img src="public/assets/images/skills/{{list.image}}.png">
           <p class="name" style="font-size:14px">{{list.skill_name}}</p>
         </ion-avatar>
         <p></p>

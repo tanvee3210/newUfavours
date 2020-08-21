@@ -19,8 +19,8 @@ export class Tab2Page implements OnInit {
   Skilllist: any = [];
   createprofile = true
   qualificationList: any = [];
-  fname: any;
-  lname: any;
+  first_name: any;
+  last_name: any;
   name: any;
   skill: any;
   location: any;
@@ -93,8 +93,8 @@ export class Tab2Page implements OnInit {
   }
   setUserDetails(userDetails) {
     this.getJobSkill(userDetails.skill);
-    this.fname = userDetails.first_name
-    this.lname = userDetails.last_name
+    this.first_name = userDetails.first_name
+    this.last_name = userDetails.last_name
     this.bio = userDetails.bio
     this.skill = userDetails.skill
     this.job = userDetails.job
@@ -323,10 +323,10 @@ export class Tab2Page implements OnInit {
     headers.append("Authorization", "Bearer " + this.api_service.user.Token.token);
     let options: any = { headers: headers };
 
-    if (this.fname && this.lname && this.bio && this.skill && this.job && this.city && this.pincode && this.qualification && this.other_favour) {
+    if (this.first_name && this.last_name && this.bio && this.skill && this.job && this.city && this.pincode && this.qualification && this.other_favour) {
       let userObj = {
-        fname: this.fname,
-        lname: this.lname,
+        first_name: this.first_name,
+        last_name: this.last_name,
         bio: this.bio,
         skill: this.skill,
         job: this.job,
