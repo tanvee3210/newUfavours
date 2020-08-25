@@ -21,7 +21,7 @@ export class SendMessagePage implements OnInit {
     // private camera: Camera,
     public api_service: ApiServiceService) { }
 
- 
+
 
   onBack() {
     this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename: 'tab4', id: this.id } })
@@ -56,6 +56,7 @@ export class SendMessagePage implements OnInit {
         this.sendMessage = res;
         this.api_service.hideLoader();
         if (this.sendMessage) {
+          this.message = ''
           const alert = await this.alertCtrl.create({
             message: "Send Message Successfully!.",
             buttons: [

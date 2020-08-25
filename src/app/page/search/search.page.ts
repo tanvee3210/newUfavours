@@ -20,6 +20,7 @@ export class SearchPage implements OnInit {
   searchData: any;
   skill: any;
   job: any; jobList: any = []
+  location: any;
   constructor(private router: Router,
     public alertCtrl: AlertController,
     private http: Http,
@@ -116,9 +117,10 @@ export class SearchPage implements OnInit {
     let find: any = {}
     find.skill = this.skill.skill_name
     find.job = this.job.job_name
+    // location = this.location.location
     this.http.post(this.api_service.API_BASE + 'api/search', find, { headers: headers, body: find })
       .map((response) => response.json())
-      .subscribe(async(res) => {
+      .subscribe(async (res) => {
         console.log(res);
         this.searchData = res.data;
         await this.api_service.hideLoader();

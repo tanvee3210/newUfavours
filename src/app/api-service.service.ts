@@ -78,7 +78,7 @@ export class ApiServiceService {
     this.getCurrentLocation();
   }
 
-  async updateUser2() {
+  async updateUser2(dataObj: any) {
     console.log('user', this.user);
     let token = this.user.Token.token;
     token = "Bearer " + token;
@@ -88,7 +88,7 @@ export class ApiServiceService {
     headers.append("Authorization", token);
     let options: any = { headers: headers };
 
-    this.http.post(this.API_BASE + 'api/update_profile', this.user.data, options)
+    this.http.post(this.API_BASE + 'api/update_profile', dataObj, options)
       .subscribe((data) => {
         console.log(data);
       },
@@ -174,7 +174,12 @@ export class ApiServiceService {
             }
             self.user.data.location = location;
             console.log('Current Location', location);
-            self.updateUser2();
+            let dataObj = {
+              "location": location,
+              "latitude": lat,
+              "longitude": lng
+            };
+            self.updateUser2(dataObj);
           }
         })
         .catch((error: any) => console.log(error));

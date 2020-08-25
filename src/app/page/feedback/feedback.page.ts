@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from '../../api-service.service';
 import { Http, Response, Headers } from '@angular/http';
 import { AlertController } from '@ionic/angular';
@@ -10,13 +10,13 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./feedback.page.scss'],
 })
 export class FeedbackPage implements OnInit {
-  requestDetails:any;
-  id:any;
-  feedbackResponse:any;
-  message:any;
-  constructor(private router: Router,public route:ActivatedRoute,
+  requestDetails: any;
+  id: any;
+  feedbackResponse: any;
+  message: any;
+  constructor(private router: Router, public route: ActivatedRoute,
     public alertCtrl: AlertController,
-    public api_service: ApiServiceService,public http:Http) { }
+    public api_service: ApiServiceService, public http: Http) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -27,11 +27,11 @@ export class FeedbackPage implements OnInit {
     });
   }
 
-  onBack(){
+  onBack() {
     this.router.navigate(['/', 'time-validation-accept'], { queryParams: { id: this.id } })
-    
+
   }
-  getRequestData(){
+  getRequestData() {
     this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
@@ -39,7 +39,7 @@ export class FeedbackPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    this.http.get(this.api_service.API_BASE + 'api/request/'+this.id, { headers: headers })
+    this.http.get(this.api_service.API_BASE + 'api/request/' + this.id, { headers: headers })
       .map((response) => response.json())
       .subscribe((res) => {
         console.log(res);
@@ -52,7 +52,7 @@ export class FeedbackPage implements OnInit {
         });
   }
 
-  declineFeedback(){
+  declineFeedback() {
     this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
@@ -60,17 +60,18 @@ export class FeedbackPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    let feedbackData={
-      senderid:this.requestDetails.assign_to,
-      receiverid:this.requestDetails.assign_from,
-      text:this.message,
-      taskid:this.requestDetails.task_id
+    let feedbackData = {
+      senderid: this.requestDetails.assign_to,
+      receiverid: this.requestDetails.assign_from,
+      text: this.message,
+      taskid: this.requestDetails.task_id
     }
-    this.http.post(this.api_service.API_BASE + 'api/decline_feedback', feedbackData,{ headers: headers })
+    this.http.post(this.api_service.API_BASE + 'api/decline_feedback', feedbackData, { headers: headers })
       .map((response) => response.json())
       .subscribe(async (res) => {
         console.log(res);
         this.feedbackResponse = res;
+        this.message = ""
         this.api_service.hideLoader();
         if (this.feedbackResponse) {
           const alert = await this.alertCtrl.create({
@@ -85,7 +86,7 @@ export class FeedbackPage implements OnInit {
             ]
           })
           await alert.present();
-          
+
         }
       },
         error => {

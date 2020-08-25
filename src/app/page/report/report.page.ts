@@ -50,6 +50,8 @@ export class ReportPage implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.report = res.data;
+        this.description = ""
+        this.title = ""
         this.getUserData(res);
       },
         error => {
@@ -68,7 +70,7 @@ export class ReportPage implements OnInit {
       ]
     })
     await alert.present();
-    this.router.navigate(['/', 'tab5c'])
+    this.router.navigate(['/', 'tab5'])
   }
 }
 

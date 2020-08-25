@@ -52,6 +52,8 @@ export class ConcernPage implements OnInit {
         console.log(res);
         this.report = res.data;
         this.getUserData(res);
+        this.title = ""
+        this.description = ""
       },
         error => {
           console.log('here error', error);

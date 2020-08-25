@@ -83,6 +83,7 @@ export class MessagePage implements OnInit {
           let newMsg: any = {};
           this.message = ""
           if (data && data.data) {
+
             newMsg = data.data;
             newMsg.sender_name = this.api_service.user.data.username;
             newMsg.receiver_name = this.api_service.user.data.username;
