@@ -10,7 +10,8 @@
 <ion-content>
   <ion-row class="row1" style="background-color: #f5f6fa;">
     <ion-col size="4">
-      <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+      <img [src]="api_service.API_BASE + requestDetails.from.picture" class="main-profile" *ngIf = "requestDetails && requestDetails.from.picture" alt="">
+      <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="" *ngIf = "timeData && !requestDetails.from.picture" >
     </ion-col>
     <ion-col size="8">
       <ion-label>

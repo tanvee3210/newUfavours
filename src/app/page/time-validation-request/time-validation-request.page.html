@@ -16,11 +16,12 @@
   <ion-card>
     <ion-row>
       <ion-col size="4">
-        <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+        <img [src]="api_service.API_BASE + requestData.picture" class="main-profile" *ngIf = "requestData && requestData.picture" alt="">
+        <img src="../../../assets/images/Ufavoursimages/Child.jpg"  *ngIf = "requestData && !requestData.picture" alt="">
       </ion-col>
       <ion-col size="8">
-        <h5 class="username" *ngIf="requestData && requestData.from">{{requestData.to.name}}</h5>
-        <p class="userdes"  *ngIf="requestData && requestData.from">{{requestData.to.skill}}</p>
+        <h5 class="username" *ngIf="requestData">{{requestData.name}}</h5>
+        <p class="userdes"  *ngIf="requestData">{{requestData.skill}}</p>
         <p class="address">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam facilis.</p>
       </ion-col>
     </ion-row>

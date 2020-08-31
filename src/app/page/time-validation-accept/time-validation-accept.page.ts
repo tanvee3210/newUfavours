@@ -28,7 +28,7 @@ export class TimeValidationAcceptPage implements OnInit {
     this.router.navigate(['/', 'feedback'], { queryParams: { id: this.timeData.task_id } })
   }
   onTime() {
-    this.router.navigate(['/', 'time-validation-request'], { queryParams: { pageName:'accept',id: this.timeData.task_id } })
+    this.router.navigate(['/', 'time-validation-request'], { queryParams: { pageName:'accept',id: this.timeData.assign_from } })
   }
 
    async getRequestData() {
@@ -45,7 +45,7 @@ export class TimeValidationAcceptPage implements OnInit {
       .subscribe(async(res) => {
         console.log(res);
         this.timeData = res.data;
-        if(this.timeData.accept_reject==2){
+        if(this.timeData && this.timeData.accept_reject==2){
           this.disableFlag =true
         }
         await this.api_service.hideLoader();

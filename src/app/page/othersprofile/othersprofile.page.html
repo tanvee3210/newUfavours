@@ -16,7 +16,8 @@
     <div class="div11">
       <ion-row class="row1">
         <ion-col size="12">
-          <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+          <img [src]="api_service.API_BASE + otherDetails.picture" class="main-profile" *ngIf = "otherDetails && otherDetails.picture" alt="">
+          <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="otherDetails && !otherDetails.picture" alt="">
         </ion-col>
         <!-- <ion-col size="8"> -->
         <!-- <ion-row class="row2">

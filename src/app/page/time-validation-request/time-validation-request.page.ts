@@ -47,7 +47,7 @@ export class TimeValidationRequestPage implements OnInit {
     headers.append("Authorization", "Bearer " + token);
 
     console.log(headers);
-    this.http.get(this.api_service.API_BASE + 'api/request/' + this.id, { headers: headers })
+    this.http.get(this.api_service.API_BASE + 'api/get_user/' + this.id, { headers: headers })
       .map((response) => response.json())
       .subscribe(async (res) => {
         console.log(res);
@@ -69,8 +69,8 @@ export class TimeValidationRequestPage implements OnInit {
 
     console.log(headers);
     let data = {
-      senderid: this.requestData.assign_to,
-      receiverid: this.requestData.assign_from,
+      senderid : this.api_service.user.data.id,
+      receiverid: this.requestData.id,
       worktime: this.workingTime
     }
     this.http.post(this.api_service.API_BASE + 'api/proposeNewTime', data, { headers: headers })
