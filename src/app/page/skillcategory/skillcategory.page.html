@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-card >
-    <ion-row *ngFor="let skill of skillsCatDetails" (click)="onskillLists(skill)">
+  <ion-card  *ngFor="let skill of skillsCatDetails" (click)="onskillLists(skill)" >
+    <ion-row>
       <ion-col class="imgs" size="4">
         <img src="../../../assets/images/Ufavoursimages/Child.jpg" class="img">
       </ion-col>

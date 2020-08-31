@@ -1,7 +1,8 @@
 <ion-content *ngIf="createprofile">
   <div class="div1">
     <h4 class="create">Create Your Profile</h4>
-    <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="" class="profilepic">
+    <img [src]= "api_service.API_BASE + imgToUpload" *ngIf="imgToUpload"  alt="" class="profilepic"/>
+    <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="!imgToUpload" alt="" class="profilepic">
   </div>
   <div class="upload">
     <p (click)="openCameraOption()"><small>Upload Photo</small></p>
@@ -100,7 +101,8 @@
   <div class="div11">
     <ion-row class="row1">
       <ion-col size="4">
-        <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+        <img [src]="api_service.API_BASE + imgToUpload" *ngIf="imgToUpload" alt=""  class="main-pro">
+        <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="!imgToUpload" alt="">
       </ion-col>
       <ion-col size="8">
         <ion-row class="row2">

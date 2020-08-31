@@ -73,6 +73,7 @@ export class FeedbackPage implements OnInit {
         this.feedbackResponse = res;
         this.api_service.hideLoader();
         if (this.feedbackResponse) {
+          this.message = ""
           const alert = await this.alertCtrl.create({
             message: "Decline Feedback Successfully!.",
             buttons: [

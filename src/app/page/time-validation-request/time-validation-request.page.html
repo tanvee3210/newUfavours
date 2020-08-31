@@ -19,8 +19,8 @@
         <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
       </ion-col>
       <ion-col size="8">
-        <h5 class="username" *ngIf="requestData && requestData.from">{{requestData.from.name}}</h5>
-        <p class="userdes"  *ngIf="requestData && requestData.from">{{requestData.from.skill}}</p>
+        <h5 class="username" *ngIf="requestData && requestData.from">{{requestData.to.name}}</h5>
+        <p class="userdes"  *ngIf="requestData && requestData.from">{{requestData.to.skill}}</p>
         <p class="address">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam facilis.</p>
       </ion-col>
     </ion-row>
@@ -44,6 +44,6 @@
 </ion-content>
 <ion-footer no-border>
   <div padding>
-    <ion-button expand="block" (click)="onRequest()">Request Time</ion-button>
+    <ion-button expand="block" (click)="onRequest()">Propose New Time</ion-button>
   </div>
 </ion-footer>

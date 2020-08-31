@@ -14,6 +14,8 @@ h4.create {
 // img
 img.profilepic {
     border-radius: 50px;
+    width: 100px;
+    height: 100px;
 }
 
 .div2 {
@@ -181,4 +183,9 @@ ion-icon.add.md.hydrated {
 ion-back-button.md.button.back-button-has-icon-only.in-toolbar.ion-activatable.ion-focusable.hydrated {
     display: block;
     color: #ffffff;
+}
+
+.main-pro{
+    width: 118px;
+    height: 118px;
 }

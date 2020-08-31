@@ -29,9 +29,9 @@ export class SkillcategoryPage implements OnInit {
     this.router.navigate(['/', 'othersprofile'], { queryParams: { pagename: 'skillcategory',id:value.id } })
   }
 
-  getDetails(){
+  async getDetails(){
     this.skillsCatDetails =[]
-    this.api_service.showLoader();
+    await this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     let headers = new Headers();
     headers.append("Content-Type", "application/json");

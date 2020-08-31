@@ -79,9 +79,24 @@ export class TimeValidationRequestPage implements OnInit {
         console.log(res);
         this.requestData = res;
         await this.api_service.hideLoader();
-        if (this.requestData) {
+        if (this.requestData.message != 'You have already send new request.') {
+          this.workingTime =""
           const alert = await this.alertCtrl.create({
-            message: "Resquest Time Send Successfully!.",
+            message: "Request Time Send Successfully!.",
+            buttons: [
+              {
+                text: "OK",
+                handler: () => {
+                  this.router.navigate(['/', 'tab4'])
+                }
+              }
+            ]
+          })
+          await alert.present();
+        }else{
+          this.workingTime =""
+          const alert = await this.alertCtrl.create({
+            message: "You have already send new request",
             buttons: [
               {
                 text: "OK",
