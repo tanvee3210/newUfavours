@@ -32,7 +32,7 @@
 </ion-content>
 <ion-footer class="ion-no-border">
   <div padding>
-    <ion-button expand="block" (click)="acceptTime()" class="message">Accept Time</ion-button>
+    <ion-button expand="block" [disabled]="disableFlag" (click)="acceptTime()" class="message">Accept Time</ion-button>
   </div>
   <div padding>
     <ion-row>

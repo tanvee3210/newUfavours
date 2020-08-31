@@ -19,7 +19,7 @@ export class SearchPage implements OnInit {
   jobTitleList: any = [];
   searchData: any;
   skill: any;
-  job: any; jobList: any = []
+  job: any; jobList: any = [];
   location: any;
   constructor(private router: Router,
     public alertCtrl: AlertController,
@@ -107,28 +107,33 @@ export class SearchPage implements OnInit {
   }
 
   async search() {
-    await this.api_service.showLoader()
-    let token = this.userdetailes.Token.token
-    // console.log('token', token)
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Authorization", "Bearer " + token);
-    console.log(headers);
-    let find: any = {}
-    find.skill = this.skill.skill_name
-    find.job = this.job.job_name
-    // location = this.location.location
-    this.http.post(this.api_service.API_BASE + 'api/search', find, { headers: headers, body: find })
-      .map((response) => response.json())
-      .subscribe(async (res) => {
-        console.log(res);
-        this.searchData = res.data;
-        await this.api_service.hideLoader();
-      },
-        error => {
-          console.log('here error', error);
-          this.api_service.hideLoader();
-        });
 
+    if (this.skill.skill_name && this.job.job_name) {
+      //await this.api_service.showLoader()
+      let token = this.userdetailes.Token.token
+      // console.log('token', token)
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("Authorization", "Bearer " + token);
+      console.log(headers);
+      let find: any = {}
+      find.skill = this.skill.skill_name
+      find.job = this.job.job_name
+      find.location = this.location
+      find.keyword = ''
+
+      this.http.post(this.api_service.API_BASE + 'api/search', find, { headers: headers, body: find })
+        .map((response) => response.json())
+        .subscribe(async (res) => {
+          console.log(res);
+          this.searchData = []
+          this.searchData = res.data;
+          //  await this.api_service.hideLoader();
+        },
+          error => {
+            console.log('here error', error);
+            this.api_service.hideLoader();
+          });
+    }
   }
 }
