@@ -46,8 +46,8 @@
     </div>
   </ion-card>
 
-  <ion-card (click)="onLists()">
-    <ion-row *ngFor="let se of searchData">
+  <ion-card >
+    <ion-row *ngFor="let se of searchData" (click)="onLists(se)">
       <ion-col class="imgs" size="4">
         <img src="../../../assets/images/Ufavoursimages/Child.jpg" class="img">
       </ion-col>

@@ -19,8 +19,8 @@ export class Tab2Page implements OnInit {
   Skilllist: any = [];
   createprofile = true
   qualificationList: any = [];
-  first_name: any;
-  last_name: any;
+  fname: any;
+  lname: any;
   name: any;
   skill: any;
   location: any;
@@ -30,7 +30,7 @@ export class Tab2Page implements OnInit {
   pincode: any;
   qualification: any;
   getcreateProfile: any;
-  imgToUpload: any;
+  imgToUpload: any = "";
   _isMobileDevice = true;
   userdetailes: any
   data: any = {}
@@ -40,6 +40,7 @@ export class Tab2Page implements OnInit {
   jobList: any = [];
   getJobList: any = [];
   avgRating: any = 0;
+  tempImage: any;
 
   constructor(private router: Router,
     public alertCtrl: AlertController,
@@ -86,6 +87,9 @@ export class Tab2Page implements OnInit {
     if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.location) {
       this.location = this.api_service.user.data.location;
     }
+    if (this.api_service.user && this.api_service.user.data && this.api_service.user.data.picture) {
+      this.imgToUpload = this.api_service.user.data.picture;
+    }
 
   }
   ngOnInit() {
@@ -93,19 +97,20 @@ export class Tab2Page implements OnInit {
   }
   setUserDetails(userDetails) {
     this.getJobSkill(userDetails.skill);
-    this.first_name = userDetails.first_name
-    this.last_name = userDetails.last_name
+    this.fname = userDetails.first_name
+    this.lname = userDetails.last_name
     this.bio = userDetails.bio
     this.skill = userDetails.skill
     this.job = userDetails.job
     this.city = userDetails.city
     this.pincode = userDetails.pincode
     this.qualification = userDetails.qualification
+    this.tempImage = userDetails.picture
     this.imgToUpload = userDetails.picture
     this.other_favour = userDetails.other_favour
   }
   onEdit() {
-    // this.setUserDetails(this.api_service.user.data);
+    this.setUserDetails(this.api_service.user.data);
     this.createprofile = true
   }
 
@@ -160,8 +165,8 @@ export class Tab2Page implements OnInit {
 
   chooseImage(type) {
     var self = this;
-    if (this.isMobileDevice()) {
-      var options = this.GetPictureOption(parseInt(type));
+    if (self.isMobileDevice()) {
+      var options = self.GetPictureOption(parseInt(type));
       self.camera.getPicture(options).then(
         function (imageData) {
           self.imgToUpload = imageData;
@@ -182,11 +187,13 @@ export class Tab2Page implements OnInit {
           });
         },
         function (err) {
+          self.imgToUpload = self.getHardCodeCameraImage();
+          self.imgToUpload = "data:image/png;base64," + self.imgToUpload;
           console.log(err);
         }
       );
     } else {
-      self.imgToUpload = this.getHardCodeCameraImage();
+      self.imgToUpload = self.getHardCodeCameraImage();
       self.imgToUpload = "data:image/png;base64," + self.imgToUpload;
     }
 
@@ -323,18 +330,21 @@ export class Tab2Page implements OnInit {
     headers.append("Authorization", "Bearer " + this.api_service.user.Token.token);
     let options: any = { headers: headers };
 
-    if (this.first_name && this.last_name && this.bio && this.skill && this.job && this.city && this.pincode && this.qualification && this.other_favour) {
-      let userObj = {
-        first_name: this.first_name,
-        last_name: this.last_name,
+    if (this.fname && this.lname && this.bio && this.skill && this.job && this.city && this.pincode && this.qualification && this.other_favour) {
+      let userObj: any = {
+        first_name: this.fname,
+        last_name: this.lname,
         bio: this.bio,
         skill: this.skill,
         job: this.job,
         city: this.city,
         pincode: this.pincode,
         qualification: this.qualification,
-        picture: this.imgToUpload,
+        // picture: this.imgToUpload,
         other_favour: this.other_favour.toString()
+      }
+      if (this.tempImage != this.imgToUpload) {
+        userObj.picture = this.imgToUpload
       }
 
       this.http.post(this.api_service.API_BASE + 'api/update_profile', userObj, options)
@@ -414,9 +424,9 @@ export class Tab2Page implements OnInit {
         {
           text: "YES",
           handler: data => {
-            localStorage.clear();
-            this.router.navigate(['/', 'login'])
 
+            this.router.navigate(['/', 'login'])
+            localStorage.clear();
             // this.api_service.toaster('logout successfully')
           }
         },

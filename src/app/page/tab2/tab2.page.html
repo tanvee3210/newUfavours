@@ -1,23 +1,23 @@
 <ion-content *ngIf="createprofile">
   <div class="div1">
     <h4 class="create">Create Your Profile</h4>
-    <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="" class="profilepic">
-    <div class="upload">
-      <p (click)="openCameraOption()"><small>Upload Photo</small></p>
-    </div>
+    <img [src]="api_service.API_BASE + imgToUpload" *ngIf="imgToUpload" alt="" class="profilepic" />
+    <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="!imgToUpload" alt="" class="profilepic">
   </div>
-
+  <div class="upload">
+    <p (click)="openCameraOption()"><small>Upload Photo</small></p>
+  </div>
   <div class="div2">
     <h5>Personal Information</h5>
   </div>
   <div class="div3">
     <ion-item
       style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; margin-top: 10px;">
-      <ion-input type="text" placeholder="First name" [(ngModel)]="first_name"></ion-input>
+      <ion-input type="text" placeholder="First name" [(ngModel)]="fname"></ion-input>
     </ion-item>
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
-      <ion-input type="text" placeholder="Last name" [(ngModel)]="last_name"></ion-input>
+      <ion-input type="text" placeholder="Last name" [(ngModel)]="lname"></ion-input>
     </ion-item>
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
@@ -40,7 +40,7 @@
       <ion-label>Current job title</ion-label>
 
       <!-- <ion-select value="" [(ngModel)]="job">
-  <ion-select-option>Default Job Title</ion-select-option> -->
+  <!-- <ion-select-option>Default Job Title</ion-select-option> -->
       <!-- <ion-select-option *ngFor="let list of jobList">{{list.job_name}}</ion-select-option> -->
       <ion-select [(ngModel)]="job">
         <ion-select-option [value]="list.job_name" *ngFor="let list of jobList">{{list.job_name}}</ion-select-option>
@@ -101,7 +101,8 @@
   <div class="div11">
     <ion-row class="row1">
       <ion-col size="4">
-        <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+        <img [src]="api_service.API_BASE + imgToUpload" *ngIf="imgToUpload" alt="" class="main-pro">
+        <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="!imgToUpload" alt="">
       </ion-col>
       <ion-col size="8">
         <ion-row class="row2">
@@ -148,7 +149,6 @@
         <ion-input type="text" [(ngModel)]="name" placeholder="Name" [disabled]="true"></ion-input>
       </ion-item>
       <br> -->
-
       <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; ">
         <ion-input type="text" [(ngModel)]="job" placeholder="Job title" [disabled]="true"></ion-input>
       </ion-item>
