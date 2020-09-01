@@ -40,6 +40,7 @@
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-nativegeocoder": "^3.4.1",
+    "ionic": "5.4.16",
     "jquery": "^3.5.1",
     "rxjs": "~6.5.1",
     "rxjs-compat": "^6.5.5",

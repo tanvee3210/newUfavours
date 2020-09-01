@@ -108,6 +108,9 @@ export class Tab3Page implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.allSkilllist = res.data;
+        // if(this.allSkilllist && this.allSkilllist.length){
+        //   this.allSkilllist.map(s => s.image = this.api_service.API_BASE+s.image )
+        // }
       },
         error => {
           console.log('here error', error);

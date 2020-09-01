@@ -49,7 +49,8 @@
   <ion-card >
     <ion-row *ngFor="let se of searchData" (click)="onLists(se)">
       <ion-col class="imgs" size="4">
-        <img src="../../../assets/images/Ufavoursimages/Child.jpg" class="img">
+        <img [src]="api_service.API_BASE + se.picture" class="main-profile" *ngIf = "se && se.picture" alt="">
+        <img src="../../../assets/images/Ufavoursimages/Child.jpg" class="img"  *ngIf = "se && !se.picture">
       </ion-col>
       <ion-col size="5">
         <ion-label>

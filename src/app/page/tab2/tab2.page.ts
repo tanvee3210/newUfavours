@@ -41,6 +41,7 @@ export class Tab2Page implements OnInit {
   getJobList: any = [];
   avgRating: any = 0;
   tempImage: any;
+  uploadFlag: boolean = false
 
   constructor(private router: Router,
     public alertCtrl: AlertController,
@@ -106,7 +107,7 @@ export class Tab2Page implements OnInit {
     this.pincode = userDetails.pincode
     this.qualification = userDetails.qualification
     this.tempImage = userDetails.picture
-    this.imgToUpload = userDetails.picture
+    this.imgToUpload = this.api_service.API_BASE + userDetails.picture
     this.other_favour = userDetails.other_favour
   }
   onEdit() {
@@ -170,6 +171,7 @@ export class Tab2Page implements OnInit {
       self.camera.getPicture(options).then(
         function (imageData) {
           self.imgToUpload = imageData;
+          self.uploadFlag = true;
           self.imgToUpload = "data:image/png;base64," + self.imgToUpload;
           // self.imgs.push("data:image/png;base64," + self.imgToUpload);
           // self.uploadImage(self.imgToUpload)
@@ -187,6 +189,7 @@ export class Tab2Page implements OnInit {
           });
         },
         function (err) {
+          self.uploadFlag = true;
           self.imgToUpload = self.getHardCodeCameraImage();
           self.imgToUpload = "data:image/png;base64," + self.imgToUpload;
           console.log(err);
@@ -194,7 +197,7 @@ export class Tab2Page implements OnInit {
       );
     } else {
       self.imgToUpload = self.getHardCodeCameraImage();
-      self.imgToUpload = "data:image/png;base64," + self.imgToUpload;
+      // self.imgToUpload = "data:image/png;base64," + self.imgToUpload;
     }
 
     // self.imgToUpload = this.getHardCodeCameraImage();
@@ -340,12 +343,14 @@ export class Tab2Page implements OnInit {
         city: this.city,
         pincode: this.pincode,
         qualification: this.qualification,
-        // picture: this.imgToUpload,
+
         other_favour: this.other_favour.toString()
       }
-      if (this.tempImage != this.imgToUpload) {
+
+      if (this.uploadFlag) {
         userObj.picture = this.imgToUpload
       }
+
 
       this.http.post(this.api_service.API_BASE + 'api/update_profile', userObj, options)
         .map((response) => response.json())
@@ -402,6 +407,10 @@ export class Tab2Page implements OnInit {
           console.log(res);
           if (res && res.data && res.data.averageRating) {
             this.avgRating = res.data.averageRating;
+
+          }
+          if (res && res.data && res.data.picture) {
+            this.imgToUpload = this.api_service.API_BASE + res.data.picture;
           }
           if (res && res.data && res.data.id) {
             this.api_service.user.data = res.data;

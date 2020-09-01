@@ -28,10 +28,11 @@
       <ion-card *ngFor="let list of requestForMe">
         <ion-row (click)="onAcceptRequest(list)" routerDirection="forward">
           <ion-col size="4">
-            <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+            <img [src]="api_service.API_BASE + list.picture" class="main-profile" *ngIf = "list && list.picture" alt="">
+            <img src="../../../assets/images/Ufavoursimages/Child.jpg"  *ngIf = "list && !list.picture" alt="">
           </ion-col>
           <ion-col size="8">
-            <h5 class="username">{{list.name}}y</h5>
+            <h5 class="username">{{list.name}}</h5>
             <p class="userdes">{{list.job}}</p>
             <p class="address">{{list.task_details}}.</p>
           </ion-col>
@@ -43,7 +44,8 @@
       <ion-card *ngFor="let list of requestFromMe">
         <ion-row routerDirection="forward" (click)="onRequestFromMe(list)">
           <ion-col size="4">
-            <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+            <img [src]="api_service.API_BASE + list.picture" class="main-profile" *ngIf = "list && list.picture" alt="">
+            <img src="../../../assets/images/Ufavoursimages/Child.jpg"  *ngIf = "list && !list.picture" alt="">
           </ion-col>
           <ion-col size="5">
             <h5 class="username">{{list.name}}</h5>

@@ -15,7 +15,8 @@
   <ion-card>
     <ion-row (click)="onRequests()">
       <ion-col size="4">
-        <img src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+        <img [src]="api_service.API_BASE + timeData.from.picture" class="main-profile" *ngIf = "timeData && timeData.from.picture" alt="">
+        <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf = "timeData && !timeData.from.picture" alt="">
       </ion-col>
       <ion-col size="8">
         <h5 class="username" *ngIf="timeData && timeData.from">{{timeData.from.username}}</h5>

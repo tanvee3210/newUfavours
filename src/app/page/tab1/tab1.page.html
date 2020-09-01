@@ -15,7 +15,8 @@
     <ion-card (click)="onMessage(list)" routerDirection="forward" *ngFor="let list of inboxList; let i = index;">
       <ion-row>
         <ion-col class="imgs" size="4">
-          <img src="../../../assets/images/Ufavoursimages/Child.jpg">
+          <img [src]="api_service.API_BASE + list.picture" class="main-profile" *ngIf = "list && list.picture" alt="">
+          <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf = "list && !list.picture">
         </ion-col>
         <ion-col size="8">
           <ion-label>

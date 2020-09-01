@@ -17,20 +17,20 @@
     <ion-slides class="slides" [options]="slideOpts1">
       <ion-slide class="ion-slide" *ngFor="let list of allSkilllist" (click)="onskillCategory(list)">
         <ion-avatar>
-          <img src="{{api_service.API_BASE}}/{{list.image}}" (click)="sliderGo(list)" class="sliderimg">
-          <p class="name">{{list.skill_name}}</p>
+          <img [src]="list.image" (click)="sliderGo(list)">
+          <p class="name" style="font-size:14px;">{{list.skill_name}}</p>
         </ion-avatar>
-        <p></p>
       </ion-slide>
     </ion-slides>
   </ion-row>
-  &nbsp;&nbsp;
+
 
   <ion-row>
     <ion-card *ngFor="let list of reviewList">
       <ion-row>
         <ion-col class="imgs" size="4">
-          <img src="../../../assets/images/Ufavoursimages/Child.jpg" class="img">
+          <img [src]="api_service.API_BASE + list.image" class="main-profile" *ngIf="list && list.image" alt="">
+          <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="list && !list.image" class="img">
         </ion-col>
         <ion-col size="8">
           <ion-label>

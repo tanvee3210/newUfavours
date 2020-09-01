@@ -1,6 +1,7 @@
 img.img-responsive {
     position: relative;
     height: 200px;
+    width: 100%;
 }
 
 ion-searchbar.sc-ion-searchbar-md-h.sc-ion-searchbar-md-s.md.searchbar-left-aligned.hydrated {
@@ -62,4 +63,11 @@ ion-row.sliders.md.hydrated {
     position: absolute;
     top: 78px;
     width: 100%;
+}
+
+.main-profile {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
 }

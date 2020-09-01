@@ -31,6 +31,9 @@ export class SearchPage implements OnInit {
     this.userdetailes = JSON.parse(localStorage.getItem("userDetails"))
     console.log('userdetailes', this.userdetailes);
     this.api_service.getCurrentLocation();
+    this.skill ="";
+    this.job="";
+    this.location="";
     this.getSkilllist();
     // this.getJobTitle();
   }
