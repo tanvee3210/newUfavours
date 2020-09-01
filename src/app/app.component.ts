@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Router } from "@angular/router";
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -13,12 +13,14 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 })
 export class AppComponent {
   //hideTabs: any = true;
+  user:any;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private androidPermissions: AndroidPermissions,
-    public tabs: TabsService
+    public tabs: TabsService,
+    public router:Router
   ) {
     this.initializeApp();
   }
@@ -30,6 +32,12 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.loadUIDisplay();
+      if (this.user) {
+        this.router.navigate(['/', 'tab2'])
+      } else {
+        this.router.navigateByUrl("/login");
+      }
       this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
         async res => {
           console.log('Has Location permission?', res.hasPermission);
@@ -41,7 +49,11 @@ export class AppComponent {
         });
     });
   }
-
+  loadUIDisplay() {
+    try {
+      this.user = JSON.parse(localStorage.getItem("userDetails"));
+    } catch (err) { }
+  }
 
 
 }
