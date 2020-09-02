@@ -62,8 +62,8 @@ export class LoginPage implements OnInit {
   async getloginuser(u: any) {
     this.api_service.user = u;
     console.log("here check", u);
+    this.router.navigateByUrl("/tab2");
     this.api_service.updateUser();
-    this.router.navigate(['/', 'tab2'])
   }
 
   showicon() {
