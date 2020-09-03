@@ -23,8 +23,8 @@ export class Tab3Page implements OnInit {
     spaceBetween: 0,
     autoplay: true
   };
-  allSkilllist:any;
-  skillName:any;
+  allSkilllist: any;
+  skillName: any;
   reviewList: any;
   constructor(private router: Router,
     public alertCtrl: AlertController,
@@ -44,37 +44,10 @@ export class Tab3Page implements OnInit {
     this.router.navigate(['/', 'search'])
   }
   onskillCategory(value) {
-    this.router.navigate(['/', 'skillcategory'],{ queryParams: { skill: value.skill_name} })
+    this.router.navigate(['/', 'skillcategory'], { queryParams: { skill: value.skill_name } })
   }
 
-  sliderImages1 = [
-    {
-      img: "assets/images/Ufavoursimages/001.png",
-      id: 1,
-      title: 'Pizza'
-    },
-    {
-      img: "assets/images/Ufavoursimages/002.png",
-      id: 2,
-      title: 'Burger',
-    },
-    {
-      img: "assets/images/Ufavoursimages/003.png",
-      id: 3,
-      title: 'Snacks',
-    },
-    {
-      img: "assets/images/Ufavoursimages/004.png",
-      id: 4,
-      title: 'Sweets',
 
-    },
-    {
-      img: "assets/images/Ufavoursimages/005.png",
-      id: 5,
-      title: 'Chinese',
-    }
-  ];
 
   async getReviewList() {
     let token = this.api_service.user.Token.token
