@@ -58,7 +58,7 @@ export class SendMessagePage implements OnInit {
         if (this.sendMessage) {
           this.message = ''
           const alert = await this.alertCtrl.create({
-            message: "Send Message Successfully!.",
+            message: "Message sent successfully!.",
             buttons: [
               {
                 text: "OK",

@@ -75,7 +75,7 @@ export class ApiServiceService {
   async updateUser() {
     console.log('user', this.user);
     localStorage.setItem('userDetails', JSON.stringify(this.user));
-    this.getCurrentLocation();
+    // this.getCurrentLocation();
   }
 
   async updateUser2(dataObj: any) {

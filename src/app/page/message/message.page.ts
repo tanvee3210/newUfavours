@@ -103,7 +103,7 @@ export class MessagePage implements OnInit {
 
   async getMessages(u: any) {
     const alert = await this.alertCtrl.create({
-      message: "Message Send Successfully!.",
+      message: "Message sent successfully!.",
       buttons: [
         {
           text: "OK"

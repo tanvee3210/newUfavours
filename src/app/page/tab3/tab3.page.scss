@@ -14,8 +14,16 @@ ion-col.icons.md.hydrated {
     font-size: 40px;
 }
 
+.swiper-slide img {
+    height: fit-content !important;
+}
+
 ion-col.search.md.hydrated {
     bottom: 64px;
+}
+
+ion-avatar.md.hydrated {
+    border: 2px solid lightgrey;
 }
 
 p.name {

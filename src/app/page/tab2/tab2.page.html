@@ -25,10 +25,7 @@
     </ion-item>
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
-      <!-- <ion-input type="password" placeholder="Skill Catagory(s) "></ion-input> -->
       <ion-label>Skills</ion-label>
-      <!-- <ion-select value="" [(ngModel)]="skill">
-  <ion-select-option *ngFor="let list of Skilllist">{{list.skill_name}}</ion-select-option> -->
       <ion-select [(ngModel)]="skill" (ionChange)="getJobSkill(skill)">
         <ion-select-option [value]="list.skill_name" *ngFor="let list of Skilllist">{{list.skill_name}}
         </ion-select-option>
@@ -36,19 +33,12 @@
     </ion-item>
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
-      <!-- <ion-input type="text" placeholder="Current job title" [(ngModel)]="job"></ion-input> -->
       <ion-label>Current job title</ion-label>
-
-      <!-- <ion-select value="" [(ngModel)]="job">
-  <ion-select-option>Default Job Title</ion-select-option> -->
-      <!-- <ion-select-option *ngFor="let list of jobList">{{list.job_name}}</ion-select-option> -->
       <ion-select [(ngModel)]="job">
         <ion-select-option [value]="list.job_name" *ngFor="let list of jobList">{{list.job_name}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <!-- <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
-  <ion-input type="text" placeholder="Current job title" [(ngModel)]="job"></ion-input>
-  </ion-item> -->
+
     <br>
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
       <ion-input type="text" placeholder="Town" [(ngModel)]="city"></ion-input>
@@ -76,8 +66,8 @@
     <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
       <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
       <ion-label>Other Favours</ion-label>
-      <ion-select value="list" [(ngModel)]="other_favour" multiple="true">
-        <ion-select-option *ngFor="let list of otherFavourList">{{list.f_name}}</ion-select-option>
+      <ion-select [(ngModel)]="other_favour" multiple="true">
+        <ion-select-option *ngFor="let list of otherFavourList" [value]="list.name">{{list.f_name}}</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -137,9 +127,9 @@
 
     <ion-row>
       <ion-card class="cards">
-        <h5 class="username">{{api_service.user.data.name}}</h5>
+        <h5 class="username">{{name}}</h5>
         <div class="star-rating" [innerHTML]="api_service.getStarMarks(avgRating)"></div>
-        <p class="userdes">{{api_service.user.data.job}}</p>
+        <p class="userdes">{{job}}</p>
         <p class="address">{{api_service.user.data.bio}}</p>
       </ion-card>
     </ion-row>

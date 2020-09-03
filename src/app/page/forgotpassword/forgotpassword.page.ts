@@ -58,7 +58,7 @@ export class ForgotpasswordPage implements OnInit {
     console.log("here check", u.data);
     this.api_service.updateUser();
     const alert = await this.alertCtrl.create({
-      message: "Password is Updated Successfully!.",
+      message: " Password updated successfully, please check your email!.",
       buttons: [
         {
           text: "OK"
