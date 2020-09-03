@@ -34,9 +34,9 @@ export class AppComponent {
       this.splashScreen.hide();
       this.loadUIDisplay();
       if (this.user) {
-        this.router.navigate(['/', 'tab2'])
+        this.router.navigateByUrl('/tab2')
       } else {
-        this.router.navigateByUrl("/login");
+        // this.router.navigateByUrl("/login");
       }
       this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
         async res => {

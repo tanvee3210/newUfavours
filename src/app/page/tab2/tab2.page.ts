@@ -17,7 +17,8 @@ import { from } from 'rxjs';
 })
 export class Tab2Page implements OnInit {
   Skilllist: any = [];
-  createprofile = true
+  createprofile:boolean = false;
+  completeprofile:boolean=false
   qualificationList: any = [];
   fname: any;
   lname: any;
@@ -103,6 +104,8 @@ export class Tab2Page implements OnInit {
 
   }
   async getUserDetails() {
+      this.createprofile=false;
+      this.completeprofile=false;
       // this.api_service.showLoader();
       let token = this.api_service.user.Token.token;
       token = "Bearer " + token;
@@ -120,7 +123,7 @@ export class Tab2Page implements OnInit {
             this.createprofile=true
           }
           else{
-            this.createprofile =false;
+            this.completeprofile =true;
             this.api_service.user.data = res.data
             if (res && res.data && res.data.averageRating) {
                this.avgRating = res.data.averageRating;
@@ -137,6 +140,7 @@ export class Tab2Page implements OnInit {
             if (res && res.data && res.data.other_favour) {
               this.other_favour = res.data.other_favour;
             }
+            this.imgToUpload=""
             if (res && res.data && res.data.picture) {
               this.imgToUpload = this.api_service.API_BASE + res.data.picture;
             }
@@ -183,7 +187,8 @@ export class Tab2Page implements OnInit {
   }
   onEdit() {
     this.setUserDetails(this.api_service.user.data);
-    this.createprofile = true
+    this.completeprofile=false;
+    this.createprofile=true;
   }
 
   onSearch() {
@@ -426,6 +431,9 @@ export class Tab2Page implements OnInit {
       this.http.post(this.api_service.API_BASE + 'api/update_profile', userObj, options)
         .map((response) => response.json())
         .subscribe(async (data) => {
+          if(data){
+
+          }
           await this.getUserDetails();
           this.getUserData(data);
         },
@@ -461,7 +469,9 @@ export class Tab2Page implements OnInit {
       ]
     })
     await alert.present();
-    this.createprofile = false
+    this.createprofile = false;
+    this.completeprofile=true;
+
   }
 
  
