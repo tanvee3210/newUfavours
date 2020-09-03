@@ -52,6 +52,16 @@ export class Tab2Page implements OnInit {
     public api_service: ApiServiceService) { }
 
   ionViewDidEnter() {
+    this.imgToUpload="";
+    this.fname="";
+    this.lname="";
+    this.skill="";
+    this.job="";
+    this.bio="";
+    this.city="";
+    this.pincode="";
+    this.qualification="";
+    this.other_favour="";
     this.getSkilllist();
     this.getUserDetails();
     this.getQualification()
@@ -103,6 +113,7 @@ export class Tab2Page implements OnInit {
   ngOnInit() {
 
   }
+  
   async getUserDetails() {
       this.createprofile=false;
       this.completeprofile=false;
