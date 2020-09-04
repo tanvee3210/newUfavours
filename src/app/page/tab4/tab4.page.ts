@@ -17,6 +17,8 @@ export class Tab4Page implements OnInit {
   notification: string = "for";
   requestForMe: any;
   requestFromMe: any;
+  forFlag:boolean=false;
+  fromFlag:boolean=false;
 
   constructor(private router: Router,
     public alertCtrl: AlertController,
@@ -24,6 +26,8 @@ export class Tab4Page implements OnInit {
     public api_service: ApiServiceService) { }
 
   ionViewDidEnter() {
+    this.forFlag=false;
+    this.fromFlag=false;
     this.getRequestForme()
     this.getRequestFromme()
   }
@@ -40,6 +44,7 @@ export class Tab4Page implements OnInit {
 
   // RequestForMe
   async getRequestForme() {
+    
     let token = this.api_service.user.Token.token
     // console.log('token', token)
     let headers = new Headers();
@@ -52,6 +57,9 @@ export class Tab4Page implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.requestForMe = res.data;
+        if( this.requestForMe &&  this.requestForMe.length ==0){
+          this.forFlag=true;
+        }
       },
         error => {
           console.log('here error', error);
@@ -73,6 +81,9 @@ export class Tab4Page implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.requestFromMe = res.data;
+        if( this.requestFromMe &&  this.requestFromMe.length ==0){
+          this.fromFlag=true;
+        }
         this.api_service.hideLoader();
       },
         error => {

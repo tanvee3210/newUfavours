@@ -10,6 +10,7 @@ import { ApiServiceService } from '../../api-service.service';
 })
 export class SkillcategoryPage implements OnInit {
   skill:any;
+  dataFlag:boolean=false;
   skillsCatDetails:any;
   constructor(private router: Router,
     public route:ActivatedRoute,
@@ -30,6 +31,7 @@ export class SkillcategoryPage implements OnInit {
   }
 
   async getDetails(){
+    this.dataFlag=false;
     this.skillsCatDetails =[]
     await this.api_service.showLoader();
     let token = this.api_service.user.Token.token
@@ -46,6 +48,9 @@ export class SkillcategoryPage implements OnInit {
       .subscribe(async (res) => {
         console.log(res);
         this.skillsCatDetails = res;
+        if(this.skillsCatDetails && this.skillsCatDetails.length ==0){
+           this.dataFlag=true;
+        }
         await this.api_service.hideLoader();
       },
         error => {
