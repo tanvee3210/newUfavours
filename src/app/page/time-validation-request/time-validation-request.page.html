@@ -16,12 +16,13 @@
   <ion-card>
     <ion-row>
       <ion-col size="4">
-        <img [src]="api_service.API_BASE + requestData.picture" class="main-profile" *ngIf = "requestData && requestData.picture" alt="">
-        <img src="../../../assets/images/Ufavoursimages/Child.jpg"  *ngIf = "requestData && !requestData.picture" alt="">
+        <img [src]="api_service.API_BASE + requestData.picture" class="main-profile"
+          *ngIf="requestData && requestData.picture" alt="">
+        <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="requestData && !requestData.picture" alt="">
       </ion-col>
       <ion-col size="8">
         <h5 class="username" *ngIf="requestData">{{requestData.name}}</h5>
-        <p class="userdes"  *ngIf="requestData">{{requestData.skill}}</p>
+        <p class="userdes" *ngIf="requestData">{{requestData.skill}}</p>
         <p class="address">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet veniam facilis.</p>
       </ion-col>
     </ion-row>
@@ -31,11 +32,11 @@
       style="border-radius: 5px; margin-left: 10px; margin-right: 10px;    border: 1px solid lightgrey; height: 45px; margin-top: 10px;">
       <ion-label>Amount</ion-label>
       <ion-select multiple="false" cancelText="Cancel" okText="Okay!" [(ngModel)]="workingTime">
-        <ion-select-option value="0.5 hours">0.5 hours</ion-select-option>
-        <ion-select-option value="1 hours">1 hours</ion-select-option>
+        <ion-select-option value="0.5 hours">0.5 hour</ion-select-option>
+        <ion-select-option value="1 hours">1 hour</ion-select-option>
         <ion-select-option value="2 hours">2 hours</ion-select-option>
-        <ion-select-option value="1/2 days">1/2 days</ion-select-option>
-        <ion-select-option value="1 days">1 days</ion-select-option>
+        <ion-select-option value="1/2 days">1/2 day</ion-select-option>
+        <ion-select-option value="1 days">1 day</ion-select-option>
         <ion-select-option value="1.5 days">1.5 days</ion-select-option>
         <ion-select-option value="2 days">2 days</ion-select-option>
       </ion-select>

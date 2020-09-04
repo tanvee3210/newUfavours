@@ -73,8 +73,7 @@
 
   </div>
   <div padding>
-    <!-- <ion-button expand="block" (click)="onDone()">Done</ion-button> -->
-    <ion-button expand="block" (click)="onUpdate()" routerDirection="forward">Done</ion-button>
+    <ion-button expand="block" (click)="onUpdate()">Done</ion-button>
   </div>
 </ion-content>
 
@@ -128,7 +127,7 @@
     <ion-row>
       <ion-card class="cards">
         <h5 class="username">{{name}}</h5>
-        <div class="star-rating" [innerHTML]="api_service.getStarMarks(avgRating)"></div>
+        <!-- <div class="star-rating" [innerHTML]="api_service.getStarMarks(avgRating)"></div> -->
         <p class="userdes">{{job}}</p>
         <p class="address">{{api_service.user.data.bio}}</p>
       </ion-card>
@@ -160,7 +159,6 @@
     </div>
   </div>
   <div padding>
-
     <ion-button expand="block" class="time" (click)="onLogout()">Logout</ion-button>
   </div>
 </ion-content>

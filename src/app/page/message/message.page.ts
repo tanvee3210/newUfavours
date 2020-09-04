@@ -111,7 +111,7 @@ export class MessagePage implements OnInit {
       ]
     })
     await alert.present();
-    this.router.navigate(['/', 'tab1'])
+    // this.router.navigate(['/', 'tab1'])
   }
   // ionViewDidEnter() {
   // view message
