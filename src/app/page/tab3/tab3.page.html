@@ -1,47 +1,166 @@
-<ion-content>
-  <img src="../../../assets/images/Ufavoursimages/Homepage.jpg" class="img-responsive" alt="Image">
-  <div class="texts">
-    <h3 class="logo">Welcome</h3>
-    <h1 class="logo">Ufavours</h1>
+<ion-content *ngIf="createprofile">
+  <div class="div1">
+    <h4 class="create">Create Your Profile</h4>
+    <img [src]="imgToUpload" *ngIf="imgToUpload" alt="" class="profilepic" />
+    <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="!imgToUpload" alt="" class="profilepic">
   </div>
+  <div class="upload">
+    <p (click)="openCameraOption()"><small>Upload Photo</small></p>
+  </div>
+  <div class="div2">
+    <h5>Personal Information</h5>
+  </div>
+  <div class="div3">
+    <ion-item
+      style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; margin-top: 10px;">
+      <ion-input type="text" placeholder="First name" [(ngModel)]="fname"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
+      <ion-input type="text" placeholder="Last name" [(ngModel)]="lname"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
+      <ion-input type="text" placeholder="Bio" [(ngModel)]="bio"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
+      <ion-label>Skills</ion-label>
+      <ion-select [(ngModel)]="skill" (ionChange)="getJobSkill(skill)">
+        <ion-select-option [value]="list.skill_name" *ngFor="let list of Skilllist">{{list.skill_name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
+      <ion-label>Current job title</ion-label>
+      <ion-select [(ngModel)]="job">
+        <ion-select-option [value]="list.job_name" *ngFor="let list of jobList">{{list.job_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <br>
+    <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
+      <ion-input type="text" placeholder="Town" [(ngModel)]="city"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
+      <ion-input type="number" placeholder="Postcode" [(ngModel)]="pincode"></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="div4">
+    <h5>Experience & Qualifications</h5>
+  </div>
+
+  <div class="div3">
+    <ion-item
+      style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; margin-top: 10px;">
+      <!-- <ion-input type="password" placeholder="Qualifications/certifications"></ion-input> -->
+      <ion-label>Qualifications/certifications</ion-label>
+      <ion-select [(ngModel)]="qualification">
+        <ion-select-option [value]="list.name" *ngFor="let list of qualificationList">{{list.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey;">
+      <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
+      <ion-label>Other Favours</ion-label>
+      <ion-select [(ngModel)]="other_favour" multiple="true">
+        <ion-select-option *ngFor="let list of otherFavourList" [value]="list.name">{{list.f_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </div>
+  <div padding>
+    <!-- <ion-button expand="block" (click)="onDone()">Done</ion-button> -->
+    <ion-button expand="block" (click)="onUpdate()" routerDirection="forward">Done</ion-button>
+  </div>
+</ion-content>
+
+<ion-header class="ion-no-border" *ngIf="!createprofile">
+  <ion-toolbar class="new-background-color">
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="completeprofile">
   <ion-row>
-    <ion-col size="10" class="search">
-      <ion-searchbar></ion-searchbar>
-    </ion-col>
-    <ion-col size="2" class="icons" (click)="onSearch()">
-      <ion-icon name="options"></ion-icon>
-    </ion-col>
+    <ion-searchbar (click)="onSearch()"></ion-searchbar>
   </ion-row>
+  <div class="div11">
+    <ion-row class="row1">
+      <ion-col size="4">
+        <img [src]="imgToUpload" *ngIf="imgToUpload" alt="" class="main-pro">
+        <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="!imgToUpload" alt="">
+      </ion-col>
+      <ion-col size="8">
+        <ion-row class="row2">
+          <ion-col size="6" class="colss">
+            <h5 class="h5">Time Given</h5>
+          </ion-col>
+          <ion-col size="6" class="colss">
+            <h5 class="h5">Time Received</h5>
+          </ion-col>
+          <ion-col size="6" class="cols">
+            <h5 class="h55" *ngIf="api_service.user.data.given_time && api_service.user.data.given_time > 0">
+              {{api_service.user.data.given_time}} hrs</h5>
+            <h5 class="h55" *ngIf="api_service.user.data.given_time < 0.1">---</h5>
+          </ion-col>
+          <ion-col size="6" class="cols">
+            <h5 class="h55" *ngIf="api_service.user.data.receive_time && api_service.user.data.receive_time > 0">
+              {{api_service.user.data.receive_time}} hrs</h5>
+            <h5 class="h55" *ngIf="api_service.user.data.receive_time < 0.1">---</h5>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
 
-  <ion-row class="sliders">
-    <ion-slides class="slides" [options]="slideOpts1">
-      <ion-slide class="ion-slide" *ngFor="let list of allSkilllist" (click)="onskillCategory(list)">
-        <ion-avatar>
-          <img [src]="api_service.API_BASE+ list.image" (click)="sliderGo(list)">
-          <p class="ion-text-wrap" style="font-size:10px;position:absolute;bottom: 5px;">{{list.skill_name}}</p>
-        </ion-avatar>
-      </ion-slide>
-    </ion-slides>
-  </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-button size="small" (click)="onEdit()" class="edit">🖉 Edit Profile</ion-button>
+      </ion-col>
+      <ion-col size="8">
+        <!-- blank -->
+      </ion-col>
+    </ion-row>
 
+    <ion-row>
+      <ion-card class="cards">
+        <h5 class="username">{{name}}</h5>
+        <div class="star-rating" [innerHTML]="api_service.getStarMarks(avgRating)"></div>
+        <p class="userdes">{{job}}</p>
+        <p class="address">{{api_service.user.data.bio}}</p>
+      </ion-card>
+    </ion-row>
+    <div padding class="div33">
+      <!-- <ion-item
+        style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; margin-top: 10px;">
+        <ion-input type="text" [(ngModel)]="name" placeholder="Name" [disabled]="true"></ion-input>
+      </ion-item>
+      <br> -->
+      <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; ">
+        <ion-input type="text" [(ngModel)]="job" placeholder="Job title" [disabled]="true"></ion-input>
+      </ion-item>
+      <br>
+      <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; ">
+        <ion-input type="text" [(ngModel)]="location" placeholder="Location" [disabled]="true"></ion-input>
+      </ion-item>
+      <br>
+      <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; ">
+        <!-- <ion-input type="password" placeholder="Experience/employment history"></ion-input> -->
+        <!-- <ion-label>Other Favours</ion-label> -->
+        <ion-input type="text" [disabled]="true" [(ngModel)]="other_favour"></ion-input>
+      </ion-item>
+      <br>
+      <ion-item style="border-radius: 5px; margin-left: 10px; margin-right: 10px; border: 1px solid lightgrey; ">
+        <ion-input type="text" [disabled]="true" [(ngModel)]="qualification"></ion-input>
+      </ion-item>
+      <br>
+    </div>
+  </div>
+  <div padding>
 
-  <ion-row>
-    <ion-card *ngFor="let list of reviewList">
-      <ion-row>
-        <ion-col class="imgs" size="4">
-          <img [src]="api_service.API_BASE + list.image" class="main-profile" *ngIf="list && list.image" alt="">
-          <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="list && !list.image" class="img">
-        </ion-col>
-        <ion-col size="8">
-          <ion-label>
-            <h2>{{list.name}}</h2>
-            <div class="star-rating" [innerHTML]="api_service.getStarMarks(list.rating)"></div>
-            <h3>{{list.rating_text}}</h3>
-            <p>{{list.review_text}}</p>
-          </ion-label>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-
-  </ion-row>
+    <ion-button expand="block" class="time" (click)="onLogout()">Logout</ion-button>
+  </div>
 </ion-content>
