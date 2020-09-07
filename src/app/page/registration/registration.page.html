@@ -33,7 +33,8 @@
         </div>
         <div class="checkbox" (ionChange)="checkTerms()">
           <ion-checkbox slot="start"></ion-checkbox>
-          <ion-label>I agree with the <span>Terms of Use</span> & <span>Privacy Policy</span>.</ion-label>
+          <ion-label>I agree with the <span (click)="onTermandCondition()">Terms of Use</span> & <span>Privacy
+              Policy</span>.</ion-label>
         </div>
 
         <div padding>

@@ -17,20 +17,29 @@
     <ion-slides class="slides" [options]="slideOpts1">
       <ion-slide class="ion-slide" *ngFor="let list of allSkilllist" (click)="onskillCategory(list)">
         <ion-avatar>
-          <img [src]="api_service.API_BASE + list.image"  class="imgslide" (click)="sliderGo(list)"/>
-          <p class="name" style="font-size:14px;position:absolute;top:20px" >{{list.skill_name}}</p>
+          <img [src]="api_service.API_BASE + list.image" class="imgslide" (click)="sliderGo(list)" />
+          <p class="name">
+            {{list.skill_name}}</p>
         </ion-avatar>
       </ion-slide>
     </ion-slides>
   </ion-row>
 
+  <!-- <ion-row>
+    <ul class="slider-img">
+      <li *ngFor="let list of allSkilllist" (click)="onskillCategory(list)">
+        <img [src]="api_service.API_BASE + list.image" class="imgslide" (click)="sliderGo(list)" />
+        <p class="username"> {{list.skill_name}}</p>
+      </li>
+    </ul>
+  </ion-row> -->
 
   <ion-row>
     <ion-card *ngFor="let list of reviewList">
       <ion-row>
         <ion-col class="imgs" size="4">
-          <img [src]="api_service.API_BASE + list.image" class="main-profile" *ngIf = "list && list.image" alt="">
-          <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf = "list && !list.image" class="img" >
+          <img [src]="api_service.API_BASE + list.image" class="main-profile" *ngIf="list && list.image" alt="">
+          <img src="../../../assets/images/Ufavoursimages/Child.jpg" *ngIf="list && !list.image" class="img">
         </ion-col>
         <ion-col size="8">
           <ion-label>

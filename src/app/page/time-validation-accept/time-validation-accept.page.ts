@@ -12,7 +12,7 @@ export class TimeValidationAcceptPage implements OnInit {
   id: any;
   timeData: any;
   acceptTimeData: any;
-  disableFlag:boolean=false;
+  disableFlag: boolean = false;
   constructor(private router: Router, public route: ActivatedRoute,
     public api_service: ApiServiceService, public alertCtrl: AlertController, public http: Http) { }
 
@@ -28,10 +28,11 @@ export class TimeValidationAcceptPage implements OnInit {
     this.router.navigate(['/', 'feedback'], { queryParams: { id: this.timeData.task_id } })
   }
   onTime() {
-    this.router.navigate(['/', 'time-validation-request'], { queryParams: { pageName:'accept',id: this.timeData.assign_from } })
+    this.router.navigate(['/', 'time-validation-request'], { queryParams: { pageName: 'accept', id: this.timeData.assign_from } })
   }
 
-   async getRequestData() {
+  async getRequestData() {
+    debugger
     await this.api_service.showLoader();
     let token = this.api_service.user.Token.token
     // console.log('token', token)
@@ -42,11 +43,22 @@ export class TimeValidationAcceptPage implements OnInit {
     console.log(headers);
     this.http.get(this.api_service.API_BASE + 'api/request/' + this.id, { headers: headers })
       .map((response) => response.json())
-      .subscribe(async(res) => {
+      .subscribe(async (res) => {
         console.log(res);
         this.timeData = res.data;
-        if(this.timeData && this.timeData.accept_reject==2){
-          this.disableFlag =true
+        if (this.timeData && this.timeData.read_status_to == 0) {
+          let data = {
+            task_id: parseInt(this.timeData.task_id),
+            task_user: "to"
+          }
+           this.http.post(this.api_service.API_BASE + 'api/task_read' , data, { headers: headers })
+            .map((response) => response.json())
+            .subscribe(async (res) => {
+              console.log(res);
+            });
+        }
+        if (this.timeData && this.timeData.accept_reject == 2) {
+          this.disableFlag = true
         }
         await this.api_service.hideLoader();
       },
@@ -55,7 +67,7 @@ export class TimeValidationAcceptPage implements OnInit {
           this.api_service.hideLoader();
         });
   }
-  
+
   async acceptTime() {
     await this.api_service.showLoader();
     let token = this.api_service.user.Token.token
@@ -88,7 +100,7 @@ export class TimeValidationAcceptPage implements OnInit {
             ]
           })
           await alert.present();
-          
+
         }
       },
         error => {
