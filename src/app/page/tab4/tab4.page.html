@@ -25,6 +25,7 @@
 
   <div [ngSwitch]="notification">
     <ion-list *ngSwitchCase="'for'">
+      <p class="not-found" *ngIf="forFlag">No Requests for me</p>
       <ion-card *ngFor="let list of requestForMe">
         <ion-row (click)="onAcceptRequest(list)" routerDirection="forward">
           <ion-col size="4">
@@ -41,6 +42,7 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'from'">
+      <p class="not-found" *ngIf="fromFlag">No Requests from me</p>
       <ion-card *ngFor="let list of requestFromMe">
         <ion-row routerDirection="forward" (click)="onRequestFromMe(list)">
           <ion-col size="4">

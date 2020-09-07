@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Response, Headers } from '@angular/http';
 import { ApiServiceService } from '../../api-service.service';
 import { AlertController } from '@ionic/angular';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @Component({
   selector: 'app-tab5',
   templateUrl: './tab5.page.html',
@@ -21,7 +21,8 @@ export class Tab5Page implements OnInit {
     public route: ActivatedRoute,
     public http: Http,
     public api_service: ApiServiceService,
-    public alertCtrl: AlertController) { }
+    public alertCtrl: AlertController,
+    private iab: InAppBrowser) { }
 
   ngOnInit() {
   }
@@ -47,6 +48,7 @@ export class Tab5Page implements OnInit {
   onFAQ() {
     this.router.navigate(['/', 'faq']);
   }
+
 
   async onDelete() {
     debugger
@@ -106,4 +108,11 @@ export class Tab5Page implements OnInit {
   //   await alert.present();
   //   this.router.navigate(['/', 'tab5'])
   // }
+
+  onTermandConditions() {
+    const browser = this.iab.create(this.api_service.TERM_CONDITION);
+
+
+    browser.close();
+  }
 }

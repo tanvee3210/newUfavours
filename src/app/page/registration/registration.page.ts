@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { Http, Response } from '@angular/http';
 import { ApiServiceService } from '../../api-service.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import { from } from 'rxjs';
@@ -38,7 +39,8 @@ export class RegistrationPage implements OnInit {
   constructor(private router: Router,
     public alertCtrl: AlertController,
     private http: Http,
-    public api_service: ApiServiceService
+    public api_service: ApiServiceService,
+    private iab: InAppBrowser
   ) { }
 
   ngOnInit() {
@@ -170,5 +172,17 @@ export class RegistrationPage implements OnInit {
 
   checkTerms() {
     this.termsFlag = !this.termsFlag
+  }
+  onTermandCondition() {
+    const browser = this.iab.create(this.api_service.TERM_CONDITION);
+
+    //browser.executeScript();
+
+    //browser.insertCSS(...);
+    // browser.on('loadstop').subscribe(event => {
+    //   browser.insertCSS({ code: "body{color: red;" });
+    // });
+
+    browser.close();
   }
 }

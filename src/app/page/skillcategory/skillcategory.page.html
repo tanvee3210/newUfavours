@@ -3,11 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="tab3" icon="chevron-back"></ion-back-button>
     </ion-buttons>
-    <ion-title>Skill Category</ion-title>
+    <ion-title *ngIf="skill">{{skill}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <p class="not-found" *ngIf="dataFlag">No User Found</p>
   <ion-card *ngFor="let skill of skillsCatDetails" (click)="onskillLists(skill)">
     <ion-row>
       <ion-col class="imgs" size="4">

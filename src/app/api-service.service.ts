@@ -12,6 +12,7 @@ import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@io
 })
 export class ApiServiceService {
   API_BASE = 'https://ufavours.sdssoftltd.co.uk/';
+  TERM_CONDITION = this.API_BASE + 'public/Termsandconditionsfinal.docx';
   user: any = {};
   loader = null;
   selectedChatUser: any = []

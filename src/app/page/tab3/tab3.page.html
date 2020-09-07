@@ -18,13 +18,21 @@
       <ion-slide class="ion-slide" *ngFor="let list of allSkilllist" (click)="onskillCategory(list)">
         <ion-avatar>
           <img [src]="api_service.API_BASE + list.image" class="imgslide" (click)="sliderGo(list)" />
-          <p class="name" style="font-size:14px;position:absolute;bottom: 0px;color: black;font-weight: bolder;">
+          <p class="name">
             {{list.skill_name}}</p>
         </ion-avatar>
       </ion-slide>
     </ion-slides>
   </ion-row>
 
+  <!-- <ion-row>
+    <ul class="slider-img">
+      <li *ngFor="let list of allSkilllist" (click)="onskillCategory(list)">
+        <img [src]="api_service.API_BASE + list.image" class="imgslide" (click)="sliderGo(list)" />
+        <p class="username"> {{list.skill_name}}</p>
+      </li>
+    </ul>
+  </ion-row> -->
 
   <ion-row>
     <ion-card *ngFor="let list of reviewList">
@@ -36,7 +44,7 @@
         <ion-col size="8">
           <ion-label>
             <h2>{{list.name}}</h2>
-            <!-- <div class="star-rating" [innerHTML]="api_service.getStarMarks(list.rating)"></div> -->
+            <div class="star-rating" [innerHTML]="api_service.getStarMarks(list.rating)"></div>
             <h3>{{list.rating_text}}</h3>
             <p>{{list.review_text}}</p>
           </ion-label>

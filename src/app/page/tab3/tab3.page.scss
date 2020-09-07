@@ -27,8 +27,8 @@ ion-avatar.md.hydrated {
 }
 
 p.name {
-    margin-top: -50px;
-    font-size: 12px;
+    margin-top: 0px;
+    font-size: 9px;
 }
 
 h1.logo {
@@ -80,8 +80,32 @@ ion-row.sliders.md.hydrated {
     border-radius: 50%;
 }
 
-.imgslide{
-    width:100px;
-    height:100px;
-    max-height:100%;
+.imgslide {
+    width: 100px;
+    height: 100px;
+    max-height: 100%;
+}
+
+
+
+ion-avatar.slideavatar.md.hydrated {
+    /* margin: 10px; */
+    margin-left: 10px;
+}
+
+.UserimgSection {
+    position: relative;
+}
+
+.ion-slide {
+    height: 175px;
+    /* font-size: 12px; */
+    margin-top: -50px;
+}
+
+p.username {
+    margin-left: 10px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 13px;
 }

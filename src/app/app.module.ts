@@ -16,6 +16,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
     Geolocation,
     NativeGeocoder,
     AndroidPermissions,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
     ApiServiceService,
   ],

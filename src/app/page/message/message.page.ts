@@ -163,6 +163,17 @@ export class MessagePage implements OnInit {
     }
   }
 
+  getProfilePic(sender_id: any) {
+    let uimg = '../../../assets/images/Ufavoursimages/Child.jpg';
+    if (this.api_service.selectedThread.id == sender_id && this.api_service.selectedThread.picture != '') {
+      uimg = this.api_service.API_BASE + this.api_service.selectedThread.picture;
+    }
+    if (this.api_service.user.id == sender_id && this.api_service.user.picture != '') {
+      uimg = this.api_service.API_BASE + this.api_service.user.picture;
+    }
+    return uimg;
+  }
+
 
 
 

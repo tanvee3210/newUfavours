@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="tab1" icon="chevron-back"></ion-back-button>
     </ion-buttons>
-    <ion-title>Message</ion-title>
+    <ion-title>{{api_service.selectedThread.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,8 +11,7 @@
   <ion-row class="row1" style="background-color: hsl(228, 33%, 97%);">
     <ion-row class="{{isSender(list.sender_id, 'class')}}" *ngFor=" let list of viewMessageList">
       <ion-col size="{{isSender(list.sender_id, 'size1')}}">
-        <img *ngIf="isSender(list.sender_id, 'class') !='sender-row'"
-          src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+        <img *ngIf="isSender(list.sender_id, 'class') !='sender-row'" src="{{getProfilePic(list.sender_id)}}" alt="">
 
         <ion-label *ngIf="isSender(list.sender_id, 'class') =='sender-row'">
           <h2>{{list.sender_name}}</h2>
@@ -24,8 +23,7 @@
           <h2>{{list.sender_name}}</h2>
           <p>{{list.message}}.</p>
         </ion-label>
-        <img *ngIf="isSender(list.sender_id, 'class') =='sender-row'"
-          src="../../../assets/images/Ufavoursimages/Child.jpg" alt="">
+        <img *ngIf="isSender(list.sender_id, 'class') =='sender-row'" src="{{getProfilePic(list.sender_id)}}" alt="">
       </ion-col>
     </ion-row>
 
